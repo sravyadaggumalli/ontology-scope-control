@@ -1,0 +1,435 @@
+[{"department":"Code Compliance","service_request_type":"Code Concern - CCS","count":"703943"}
+,{"department":"Sanitation","service_request_type":"Sanitation Roll Cart Maintenance/Delivery - SAN","count":"231422"}
+,{"department":"Sanitation","service_request_type":"Sanitation Missed Garbage - SAN","count":"118243"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Parking - Report a Violation - TRN","count":"105370"}
+,{"department":"311 Customer Service Center","service_request_type":"Water/Wastewater Line Locate - 311","count":"103446"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Loose - DAS","count":"88739"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Lack of Care - DAS","count":"79940"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Parking - Report a Violation - TPW","count":"76016"}
+,{"department":"311 Customer Service Center","service_request_type":"Complaint/Compliment - 311","count":"68201"}
+,{"department":"Sanitation Services","service_request_type":"Dead Animal Pick Up - DAS","count":"65696"}
+,{"department":"Sanitation","service_request_type":"Sanitation Missed Recycle - SAN","count":"62767"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Aggressive Behavior - DAS","count":"62432"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Homeless Encampment - OHS","count":"41468"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Confined - DAS","count":"25613"}
+,{"department":"311 Customer Service Center","service_request_type":"Miscellaneous Service Request - 311","count":"25018"}
+,{"department":"Sanitation","service_request_type":"Sanitation Missed Brush/Bulk - SAN","count":"23159"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Nuisance - DAS","count":"23001"}
+,{"department":"Code Compliance","service_request_type":"Single Family Rental Needs Registration - CCS","count":"22017"}
+,{"department":"Parks Department","service_request_type":"Park Maintenance/Misc - PKR","count":"21389"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Repair - Routine - PBW","count":"20150"}
+,{"department":"Police Department","service_request_type":"Chronic Noise Complaint - DPD","count":"19068"}
+,{"department":"Police Department","service_request_type":"Extra Police Patrol - DPD","count":"18029"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pot Hole - Routine - PBW","count":"17671"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Flashing - TRN","count":"16302"}
+,{"department":"Water Utilities","service_request_type":"Storm Sewer Line Locate - DWU","count":"16266"}
+,{"department":"Sanitation","service_request_type":"Sanitation Annual 20 Cubic Yard Exemption - SAN","count":"15358"}
+,{"department":"Police Department","service_request_type":"24 Hour Parking Violation - DPD","count":"15260"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Maintenance (Other) - TRN","count":"15030"}
+,{"department":"Sanitation Services","service_request_type":"Dead Animal Pick Up - SAN","count":"13706"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Tree Down/Low Limbs - PBW","count":"12924"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Alley/Sidewalk/Street Repair - Hazardous - PBW","count":"12879"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Community Cat Program - DAS","count":"12172"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Repair - Routine - TPW","count":"11660"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Owner Surrender - DAS","count":"11599"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Other Dispatch - TRN","count":"11243"}
+,{"department":"Sanitation","service_request_type":"Sanitation Same Day Missed Collection - SAN","count":"10529"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pot Hole - Routine - TPW","count":"10495"}
+,{"department":"Code Compliance","service_request_type":"Consumer Protection Complaint - CCS","count":"10154"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Bite - DAS","count":"9752"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Alley/Sidewalk/Street Repair - Hazardous - TPW","count":"9333"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Bulb Out/NonConflict Hd Trn VO - TRN","count":"9117"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pot Hole - Hazardous - PBW","count":"9088"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Homeless Encampment - EMCR","count":"8570"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Alley Repair - Routine - PBW","count":"8083"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Flashing - TPW","count":"7547"}
+,{"department":"Sanitation","service_request_type":"Sanitation Commercial Services - SAN","count":"7520"}
+,{"department":"Police Department","service_request_type":"Traffic Violations (Chronic) - DPD","count":"7265"}
+,{"department":"Water Utilities","service_request_type":"Inlet/Storm Drain Cleaning - DWU","count":"7177"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Maintenance (Other) - TPW","count":"7114"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Tree Down/Low Limbs - TPW","count":"6646"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Spillage/Debris in Right of Way - Hazardous - PBW","count":"6539"}
+,{"department":"Sanitation","service_request_type":"Sanitation Property Damage - SAN","count":"6377"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Median/Right of Way Maintenance - PBW","count":"6336"}
+,{"department":"Police Department","service_request_type":"Panhandling - DPD","count":"6229"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - New - TRN","count":"6153"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Knockdown - TRN","count":"5898"}
+,{"department":"Police Department","service_request_type":"Narcotics/Vice Complaint - DPD","count":"5872"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Clean Sweep Litter Removal - TPW","count":"5793"}
+,{"department":"Police Department","service_request_type":"Criminal Activities - DPD","count":"5578"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Wildlife - DAS","count":"5546"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pot Hole - Hazardous - TPW","count":"5424"}
+,{"department":"Planning & Development Department","service_request_type":"Construction Site Complaint - PDD","count":"5326"}
+,{"department":"Dallas Water Utilities","service_request_type":"Water Main Leak/Break - DWU","count":"5271"}
+,{"department":"Sanitation","service_request_type":"Sanitation District Billing Dispute - SAN","count":"5137"}
+,{"department":"311 Customer Service Center","service_request_type":"Water Questions - 311","count":"4924"}
+,{"department":"Transportation and Public Works","service_request_type":"Traffic - Speed Control - TRN","count":"4773"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Lighting - Maintenance- TRN","count":"4636"}
+,{"department":"Water Utilities","service_request_type":"Creek/Culvert Maintenance -DWU","count":"4552"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Timing - TRN","count":"4445"}
+,{"department":"Planning & Development Department","service_request_type":"Construction Site Complaint - DEV","count":"4373"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Smoke Detector Request - DFR","count":"4247"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - All Out - TRN","count":"4104"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Spillage/Debris in Right of Way - Hazardous - TPW","count":"3980"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - School Flasher Maintenance - TRN","count":"3962"}
+,{"department":"Code Compliance","service_request_type":"Restaurant/Food Complaint - CCS","count":"3887"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Scooter/Bike Shared Dockless Vehicle - TRN","count":"3864"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Alley Repair - Routine - TPW","count":"3716"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - Maintenance - TRN","count":"3650"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Lighting - Maintenance- TPW","count":"3454"}
+,{"department":"Code Compliance","service_request_type":"ICR Consumer Protection Complaint - CCS","count":"3389"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Shopping Cart Routine Pickup - PBW","count":"3378"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - New - TPW","count":"3275"}
+,{"department":"Planning & Development Department","service_request_type":"Construction Site Complaint - SDC","count":"3241"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Construction Right of Way/Status - PBW","count":"3081"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Homeless Encampment - ECR","count":"3074"}
+,{"department":"Office of Budget","service_request_type":"Utility Complaint/Information - OBS","count":"2971"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Median/Right of Way Maintenance - TPW","count":"2921"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Other Dispatch - TPW","count":"2916"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sidewalk Replacement Program - PBW","count":"2884"}
+,{"department":"Sanitation","service_request_type":"Sanitation Cost-Plus - SAN","count":"2872"}
+,{"department":"Office of Budget","service_request_type":"Utility Complaint/Information - BMS","count":"2842"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Bulb Out/NonConflict Hd Trn VO - TPW","count":"2756"}
+,{"department":"Water Utilities","service_request_type":"Sewer Problems - DWU","count":"2688"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Timing - TPW","count":"2641"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Knockdown - TPW","count":"2598"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Construction Right of Way/Status - TPW","count":"2531"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Drainage Ditch Cleaning/Repairs - PBW","count":"2507"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Lid Cover Broken/Missing - Hazardous - PBW","count":"2451"}
+,{"department":"Water Utilities","service_request_type":"Storm Drainage/Flooding Complaint - DWU","count":"2449"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street/Road Blockage - TRN","count":"2439"}
+,{"department":"Transportation and Public Works","service_request_type":"Traffic - Speed Control - TPW","count":"2410"}
+,{"department":"Water Utilities","service_request_type":"Creek/Culvert Blockage - DWU","count":"2403"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street/Road Blockage - TPW","count":"2402"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Loose Cat - DAS","count":"2260"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti City Streets & Bridges - PBW","count":"2132"}
+,{"department":"Transportation and Public Works Department","service_request_type":"New Street/Sidewalk/Alley - PBW","count":"2023"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - All Out - TPW","count":"1995"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - Maintenance - TPW","count":"1958"}
+,{"department":"Police Department","service_request_type":"Handicap Parking Violation - DPD","count":"1940"}
+,{"department":"Water Utilities","service_request_type":"Inlet/Storm Drain Stopped Up - Hazardous - DWU","count":"1913"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sidewalk Replacement Program - TPW","count":"1852"}
+,{"department":"Police Department","service_request_type":"Fireworks - DPD","count":"1838"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Visibility Obstruction - PBW","count":"1832"}
+,{"department":"Sanitation","service_request_type":"Sanitation Helping Hands - SAN","count":"1756"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Head Turn (Conflicting) - TRN","count":"1717"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Shopping Carts - PBW","count":"1698"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Shopping Cart Routine Pickup - TPW","count":"1685"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Lid Cover Broken - Routine - PBW","count":"1661"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street/Road/Driveway Blockage - TPW","count":"1616"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic - Construction Signs - PBW","count":"1478"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Utility Cut/Routine - PBW","count":"1435"}
+,{"department":"Code Compliance","service_request_type":"Mobile Food Complaint - CCS","count":"1394"}
+,{"department":"Planning & Development Department","service_request_type":"Building Permits Violation - SDC","count":"1393"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Parking in Fire Lane/ Fire Hydrants - DFR","count":"1388"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Lid Cover Broken/Missing - Hazardous - TPW","count":"1380"}
+,{"department":"Environmental Quality","service_request_type":"Air Pollution Complaint - OEQS","count":"1375"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - School Flasher Maintenance - TPW","count":"1367"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Barricades - Pickup/Reset/Replace - PBW","count":"1355"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - New - TRN","count":"1303"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - New - TRN","count":"1294"}
+,{"department":"Code Compliance","service_request_type":"Emergency Regulations Violation - CCS","count":"1288"}
+,{"department":"Code Compliance","service_request_type":"Boarding Home Complaint - CCS","count":"1264"}
+,{"department":"311 Customer Service Center","service_request_type":"311 Event Request - 311","count":"1232"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Lighting- New/Relocation - TRN","count":"1226"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Fair Housing Complaint - OEI","count":"1212"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti Traffic Signal - TRN","count":"1194"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Knockdown - TRN","count":"1134"}
+,{"department":"311 Customer Service Center","service_request_type":"Water Payments & Billing Inquiry - 311","count":"1127"}
+,{"department":"Planning & Development Department","service_request_type":"Building Permits Violation - PDD","count":"1112"}
+,{"department":"Code Compliance","service_request_type":"Mosquito - Do Not Spray - CCS","count":"1095"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Barricades - Pickup/Reset/Replace - TPW","count":"1076"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Drainage Ditch Cleaning/Repairs - TPW","count":"1074"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Housing & Neighborhood Revitalization – HOU","count":"1054"}
+,{"department":"Water Utilities","service_request_type":"Water Utilities Payment Plan Request - DWU","count":"1052"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic - Construction Signs - TPW","count":"1050"}
+,{"department":"Planning & Development Department","service_request_type":"Building Permits Violation - DEV","count":"1045"}
+,{"department":"Transportation and Public Works","service_request_type":"Flooding - Emergency - PBW","count":"1044"}
+,{"department":"Dallas Water Utilities","service_request_type":"Chemical Spill Urgent - OEQS","count":"1004"}
+,{"department":"Sanitation","service_request_type":"Sanitation Litter Cans - SAN","count":"1000"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti City Streets & Bridges - TPW","count":"958"}
+,{"department":"Code Compliance","service_request_type":"Food Borne Illness - CCS","count":"949"}
+,{"department":"Water Utilities","service_request_type":"Creek Bank Erosion - DWU","count":"933"}
+,{"department":"Transportation and Public Works Department","service_request_type":"New Street/Sidewalk/Alley - TPW","count":"925"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Shopping Carts - TPW","count":"905"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Clean Sweep - TPW","count":"853"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Utility Cut/Routine - TPW","count":"847"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Stuck - TRN","count":"838"}
+,{"department":"City Attorney's Office","service_request_type":"Landlord Retaliation After Reported Code Violation - CAO","count":"833"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Snow/Ice Sanding - Hazardous - PBW","count":"782"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Lid Cover Broken - Routine - TPW","count":"777"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - New - TPW","count":"768"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Objects Dropped in Inlet - Hazardous - PBW","count":"765"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"ADA Accessibility Concerns - OEI","count":"756"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Fire Inspection - DFR","count":"750"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Sweeping - Thoroughfares - PBW","count":"749"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - New - TPW","count":"734"}
+,{"department":"Sanitation","service_request_type":"Sanitation Commercial Roll Cart Services - SAN","count":"733"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti Traffic Sign - TRN","count":"676"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Objects Dropped in Inlet - Hazardous - TPW","count":"665"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Wheel Chair Ramp/Curb Cuts - PBW","count":"659"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Inclement Weather Shelter Transportation - OHS","count":"653"}
+,{"department":"Planning & Development Department","service_request_type":"Landscaping Violation (Arborist) - PDD","count":"647"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Visibility Obstruction - TPW","count":"637"}
+,{"department":"Code Compliance","service_request_type":"Illegal Dumping Sign - CCS","count":"631"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Steel Plates in Street - PBW","count":"618"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Lighting- New/Relocation - TPW","count":"608"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail Repair - Routine - PBW","count":"591"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Head Turn (Conflicting) - TPW","count":"577"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Scooter/Bike Shared Dockless Vehicle - TPW","count":"559"}
+,{"department":"Water Utilities","service_request_type":"Water Pollution Urgent - DWU","count":"536"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Steel Plates in Street - TPW","count":"529"}
+,{"department":"Transportation and Public Works","service_request_type":"Flooding - Emergency - TPW","count":"516"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signals and Lighting - Line Locate - TPW","count":"510"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Visibility Obstruction - Hazardous - PBW","count":"506"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Knockdown - TPW","count":"503"}
+,{"department":"Facilities and Real Estate Management","service_request_type":"City Property Management/ Real Estate - PBW","count":"499"}
+,{"department":"Code Compliance","service_request_type":"Short Term/Vacation Rental Survey - CCS","count":"495"}
+,{"department":"Dallas Water Utilities","service_request_type":"Illegal Dumping Urgent - OEQS","count":"492"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Stuck - TPW","count":"490"}
+,{"department":"Transportation and Public Works Department","service_request_type":"High Water Flooded Roadway Alarm Warning System - PBW","count":"473"}
+,{"department":"311 Customer Service Center","service_request_type":"City Hall on the Go Request - 311","count":"466"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Paving Street Resurface Program - PBW","count":"466"}
+,{"department":"Library","service_request_type":"Library Concerns - LIB","count":"459"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sidewalk Utility Obstruction - PBW","count":"458"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Visibility Obstruction - TRN","count":"430"}
+,{"department":"Code Compliance","service_request_type":"Illegal Dumping Sign - CDS","count":"428"}
+,{"department":"Planning & Development Department","service_request_type":"Historic/Conservation District Violation - SDC","count":"418"}
+,{"department":"Dallas Water Utilities","service_request_type":"Storm Water Construction Site Urgent - OEQS","count":"400"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Other Dispatch - TRN","count":"398"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Towing Complaint - AVI","count":"396"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Wheel Chair Ramp/Curb Cuts - TPW","count":"386"}
+,{"department":"Risk Management","service_request_type":"Risk Management Claim Form Request - RSK","count":"384"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Paving Reconstruction Project - PBW","count":"378"}
+,{"department":"Environmental Quality","service_request_type":"Yard Waste - OEQS","count":"378"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Lock/Unlock Knox Lock or Box - DFR","count":"366"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Snow/Ice Sanding - Hazardous - TPW","count":"352"}
+,{"department":"Code Compliance","service_request_type":"Homeless Meal Event - CCS","count":"350"}
+,{"department":"Code Compliance","service_request_type":"Boarding Home Facilities - CCS","count":"347"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail Repair - Routine - TPW","count":"335"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Visibility Obstruction - Hazardous - TPW","count":"321"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Visibility Obstruction - TRN","count":"304"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Visibility Obstruction - TPW","count":"298"}
+,{"department":"Sanitation","service_request_type":"Sanitation Pack Out/Helping Hands - SAN","count":"288"}
+,{"department":"Planning & Development Department","service_request_type":"Historic District Violation - PDD","count":"281"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Parking - Valet Complaint - TRN","count":"275"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sidewalk Utility Obstruction - TPW","count":"274"}
+,{"department":"Water Utilities","service_request_type":"Floodplain/Stormwater Project Inquiry - DWU","count":"271"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Housing & Neighborhood Revitalization – OHCE","count":"268"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti Traffic Sign - TPW","count":"265"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Educational Request - DFR","count":"252"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Railroad Crossing Repair - PBW","count":"250"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail Repair - Hazardous - PBW","count":"246"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Inclement Weather Shelter Transportation - EMCR","count":"242"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Street Sweeping - Thoroughfares - TPW","count":"241"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Graffiti Traffic Signal - TPW","count":"239"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Resident Only Parking Permit - TRN","count":"235"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Utility Cut/Hazardous - TPW","count":"230"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"School Crossing Guard - CDS","count":"229"}
+,{"department":"Transportation and Public Works Department","service_request_type":"TEST CRM","count":"226"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Utility Cut/Hazardous - PBW","count":"226"}
+,{"department":"Water Utilities","service_request_type":"Water/Sanitary Sewer Construction Project - DWU","count":"219"}
+,{"department":"Water Utilities","service_request_type":"Flooded Roadway Warning System - DWU","count":"216"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Fair Housing Complaint - OHCE","count":"215"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Transportation Complaint - AVI","count":"215"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Towing Complaint - TPW","count":"209"}
+,{"department":"Dallas Water Utilities","service_request_type":"Chemical Spill Urgent - DWU","count":"206"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Locked/Blocked Exit - DFR","count":"205"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal Illegal Vending - DAS","count":"198"}
+,{"department":"Dallas Water Utilities","service_request_type":"Swimming Pool Discharge Urgent - OEQS","count":"196"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Paving Street Resurface Program - TPW","count":"196"}
+,{"department":"Dallas Water Utilities","service_request_type":"Storm Water Construction Site Urgent - DWU","count":"188"}
+,{"department":"Dallas Water Utilities","service_request_type":"Sewage Discharge - OEQS","count":"186"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail - New - TRN","count":"186"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"ADA Accessibility Concerns - OHCE","count":"183"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Signal - Visibility Obstruction - TPW","count":"182"}
+,{"department":"Code Compliance","service_request_type":"Smoking Violation - CCS","count":"178"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Social Services Request - IPS","count":"173"}
+,{"department":"Facilities and Real Estate Management","service_request_type":"City Property Management/ Real Estate - SDC","count":"172"}
+,{"department":"City Auditor","service_request_type":"Waste/Fraud/Abuse - AUD","count":"170"}
+,{"department":"Planning & Development Department","service_request_type":"Historic District Violation - OHP","count":"169"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Parking - Valet Complaint - TPW","count":"167"}
+,{"department":"Planning & Development Department","service_request_type":"Conservation District Violation - PDD","count":"162"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Railroad Crossing Repair - TPW","count":"162"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Paving Reconstruction Project - TPW","count":"162"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"School Crossing Guard - MSH","count":"162"}
+,{"department":"Water Utilities","service_request_type":"Trinity River Levee Maintenance/Mowing - DWU","count":"152"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"School Crossing Guard - MCD","count":"147"}
+,{"department":"Code Compliance","service_request_type":"Street Feeding/Homeless Meal - CCS","count":"147"}
+,{"department":"Planning & Development Department","service_request_type":"Conservation District Violation - PNV","count":"145"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Occupancy Load Violation - DFR","count":"143"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Social Services Request - ECR","count":"142"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Bike Lane Marking Maintenance – TRN","count":"142"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Fair Housing Complaint - EIO","count":"141"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Speed Limit Change Request - TRN","count":"139"}
+,{"department":"Transportation and Public Works Department","service_request_type":"High Water Flooded Roadway Alarm Warning System - TPW","count":"138"}
+,{"department":"Planning & Development Department","service_request_type":"Illegal Removal of Protected Tree - PDD","count":"135"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - Other Dispatch - TPW","count":"133"}
+,{"department":"Transportation and Public Works","service_request_type":"Road Hump/Speed Bump Request - TRN","count":"132"}
+,{"department":"Water Utilities","service_request_type":"Floodplain Project Inquiry - DWU","count":"130"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail Repair - Hazardous - TPW","count":"123"}
+,{"department":"Code Compliance","service_request_type":"Unsheltered Feeding - CCS","count":"123"}
+,{"department":"Dallas Water Utilities","service_request_type":"Storm Water Industrial Site Urgent - OEQS","count":"120"}
+,{"department":"Code Compliance","service_request_type":"Mosquito - Beekeeper Notification - CCS","count":"118"}
+,{"department":"Dallas Water Utilities","service_request_type":"Sewage Discharge Urgent- OEQS","count":"114"}
+,{"department":"Facilities and Real Estate Management","service_request_type":"City Property Management/ Real Estate - FRM","count":"105"}
+,{"department":"Dallas Water Utilities","service_request_type":"Illegal Dumping Urgent - DWU","count":"104"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Guardrail - New - TPW","count":"102"}
+,{"department":"Convention and Event Services","service_request_type":"Special Events Permit Request - CES","count":"101"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Social Services Request - EMCR","count":"100"}
+,{"department":"Transportation","service_request_type":"Alley Rumble Strips New - TRN","count":"97"}
+,{"department":"311 Customer Service Center","service_request_type":"TEST CRM","count":"94"}
+,{"department":"Planning & Development Department","service_request_type":"Landscaping Violation (Arborist) - PDV","count":"90"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sand Removal Request - PBW","count":"85"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Resident Only Parking Permit - TPW","count":"80"}
+,{"department":"Code Compliance","service_request_type":"TEST CRM","count":"79"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Speed Limit Change Request - TPW","count":"78"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Survey Questions - PBW","count":"76"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Bike Lane Marking Maintenance – TPW","count":"72"}
+,{"department":"Sanitation","service_request_type":"TEST CRM","count":"71"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Bike Paths/Routes - TRN","count":"66"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Illegal Spray Painting - DFR","count":"63"}
+,{"department":"Planning & Development Department","service_request_type":"Illegal Removal of Protected Tree - SDC","count":"61"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Interagency - TPW","count":"60"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Interagency - PBW","count":"59"}
+,{"department":"Code Compliance","service_request_type":"Illegal Dumping Sign - MSH","count":"59"}
+,{"department":"Planning & Development Department","service_request_type":"Historic District Violation - PNV","count":"58"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"Motor Vehicle Idling - MSH","count":"58"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pay Lot Booting - AVI","count":"56"}
+,{"department":"Dallas Water Utilities","service_request_type":"Sewage Discharge Urgent- DWU","count":"53"}
+,{"department":"Planning & Development Department","service_request_type":"Illegal Removal of Protected Tree - DEV","count":"53"}
+,{"department":"Code Compliance","service_request_type":"Commercial Pool Complaint - CCS","count":"52"}
+,{"department":"Parks Department","service_request_type":"TEST CRM","count":"52"}
+,{"department":"Transportation","service_request_type":"Mobility Planning - TRN","count":"52"}
+,{"department":"Police Department","service_request_type":"TEST CRM","count":"51"}
+,{"department":"Sanitation","service_request_type":"Sanitation Pack-Out - SAN","count":"49"}
+,{"department":"Dallas Water Utilities","service_request_type":"Swimming Pool Discharge Urgent - DWU","count":"45"}
+,{"department":"Office Bond and Construction Management","service_request_type":"Bond Program Projects - OBP","count":"44"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Fair Park Parking Violation - TPW","count":"43"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Transportation Complaint - TPW","count":"43"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Sand Removal Request - TPW","count":"41"}
+,{"department":"Office Bond and Construction Management","service_request_type":"Bond Program Projects - BCM","count":"38"}
+,{"department":"Sanitation","service_request_type":"Streets Referral Pickup - SAN","count":"38"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Fair Housing Complaint - FHO","count":"36"}
+,{"department":"Office of Community Services","service_request_type":"Community Care Services - OCC","count":"34"}
+,{"department":"Planning & Development Department","service_request_type":"Private Development Coordination - PDD","count":"30"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"TEST CRM","count":"30"}
+,{"department":"Code Compliance","service_request_type":"Community Prosecution - CAO","count":"29"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"Motor Vehicle Idling - CDS","count":"28"}
+,{"department":"Transportation and Public Works Department","service_request_type":"MOWmentum Program - PBW","count":"26"}
+,{"department":"Parks Department","service_request_type":"Park Emergency Regulations Violation - PKR","count":"26"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - Large Cast Iron Button Removal - TRN","count":"26"}
+,{"department":"Planning & Development Department","service_request_type":"Private Development Coordination - DEV","count":"25"}
+,{"department":"Dallas Water Utilities","service_request_type":"TEST CRM","count":"25"}
+,{"department":"Sanitation Services","service_request_type":"TEST CRM","count":"23"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Fair Park Parking Violation - TRN","count":"20"}
+,{"department":"Planning & Development Department","service_request_type":"Private Development Coordination - SDC","count":"20"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Survey Questions - TPW","count":"19"}
+,{"department":"Dallas Animal Services","service_request_type":"TEST CRM","count":"19"}
+,{"department":"Water Utilities","service_request_type":"Water Utilities Payment Plan Request","count":"19"}
+,{"department":"Dallas Water Utilities","service_request_type":"Storm Water Industrial Site Urgent - DWU","count":"19"}
+,{"department":"Dallas Water Utilities","service_request_type":"Emerald Ash Borer Information Request - DWU","count":"18"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Pay Lot Booting - TPW","count":"17"}
+,{"department":"Convention & Event Services","service_request_type":"Special Events Non-Permitted Activity Complaint - CES","count":"17"}
+,{"department":"Code Compliance","service_request_type":"code concern","count":"16"}
+,{"department":"Transportation","service_request_type":"Traffic - Street Closure - TRN","count":"15"}
+,{"department":"Office Bond and Construction Management","service_request_type":"Bond Program Projects - PBW","count":"12"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"Motor Vehicle Idling - MCD","count":"11"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"TEST CRM","count":"10"}
+,{"department":"311 Customer Service Center","service_request_type":"Test SR","count":"9"}
+,{"department":"Transportation and Public Works Department","service_request_type":"MOWmentum Program - TPW","count":"9"}
+,{"department":"Planning & Development Department","service_request_type":"TEST CRM","count":"9"}
+,{"department":"Code Compliance","service_request_type":"Test CRM","count":"7"}
+,{"department":"Water Utilities","service_request_type":"TEST CRM","count":"7"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Social Services Rquest - IPS","count":"6"}
+,{"department":"Parks Department","service_request_type":"Test SR","count":"6"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Scooter Share - TRN","count":"6"}
+,{"department":"311 Customer Service Center","service_request_type":"Test CRM","count":"5"}
+,{"department":"Code Compliance","service_request_type":"Single Family Needs Registration- CCS","count":"5"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Test SR","count":"5"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Test CRM","count":"5"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - Large Cast Iron Button Removal - TPW","count":"5"}
+,{"department":"Environmental Quality","service_request_type":"TEST CRM","count":"4"}
+,{"department":"Code Compliance","service_request_type":"Code Concern - CCS - CP","count":"4"}
+,{"department":"City Attorney's Office","service_request_type":"TEST CRM","count":"3"}
+,{"department":"Convention & Event Services","service_request_type":"TEST CRM","count":"3"}
+,{"department":"Dallas Fire Rescue","service_request_type":"TEST CRM","count":"3"}
+,{"department":"Transportation and Public Works","service_request_type":"TEST CRM","count":"3"}
+,{"department":"311 Customer Service Center","service_request_type":"Test","count":"3"}
+,{"department":"Code Compliance","service_request_type":"Code Concern","count":"3"}
+,{"department":"Library","service_request_type":"TEST CRM","count":"3"}
+,{"department":"Code Compliance","service_request_type":"Test SR","count":"3"}
+,{"department":"Code Compliance","service_request_type":"Single Family Registration- CCS","count":"2"}
+,{"department":"Code Compliance","service_request_type":"Community Prosecution- CAO","count":"2"}
+,{"department":"Sanitation","service_request_type":"Test SR","count":"2"}
+,{"department":"Facilities and Real Estate Management","service_request_type":"City Property Management/ Real Estate - FMR","count":"2"}
+,{"department":"311 Customer Service Center","service_request_type":"***No Score***","count":"2"}
+,{"department":"Convention and Event Services","service_request_type":"TEST CRM","count":"2"}
+,{"department":"Code Compliance","service_request_type":"Community Prosecution","count":"2"}
+,{"department":"311 Customer Service Center","service_request_type":"test sr","count":"2"}
+,{"department":"Code Compliance","service_request_type":"Construction Right of Way/Status - TPW","count":"2"}
+,{"department":"Code Compliance","count":"2"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"Test CRM","count":"2"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Markings - Broken Traffic Button - TRN","count":"2"}
+,{"department":"Code Compliance","service_request_type":"Homeless Encampment - OHS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Homeless Encampment","count":"1"}
+,{"department":"Code Compliance","service_request_type":"HEAVY CLEAN","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Consumer Health","count":"1"}
+,{"department":"Transportation and Public Works Department","service_request_type":"Traffic Sign - New","count":"1"}
+,{"department":"Planning & Development Department","service_request_type":"Test SR","count":"1"}
+,{"department":"Police Department","service_request_type":"Fireworks","count":"1"}
+,{"department":"Environmental Quality","service_request_type":"Test SR","count":"1"}
+,{"department":"Police Department","service_request_type":"Test CRM","count":"1"}
+,{"department":"Code Compliance","service_request_type":"code conern","count":"1"}
+,{"department":"Transportation and Public Works Department","service_request_type":"TREE DOWN","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Code Concern-CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Code concern","count":"1"}
+,{"department":"Transportation","service_request_type":"Bike Share - TRN","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Code Compliance","count":"1"}
+,{"department":"Code Compliance","service_request_type":"CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Building Permit Violation-DEV","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Boarding Home Facilities  - CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"24 hr parking","count":"1"}
+,{"department":"Transportation","service_request_type":"TEST CRM","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"Test Sr","count":"1"}
+,{"department":"Transportation and Public Works Department","service_request_type":"CSR Test","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"test CRM","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"***No violation ****","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"***No Score*******","count":"1"}
+,{"department":"Water Utilities","service_request_type":"SRD","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"***No score*****","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"Code Concern - CCS","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"***No score***","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"***no score***","count":"1"}
+,{"department":"311 Customer Service Center","service_request_type":"*****no score ****","count":"1"}
+,{"department":"Transportation and Public Works Department","service_request_type":"blocked Drive - duplicate","count":"1"}
+,{"department":"Code Compliance","service_request_type":"community prosecution","count":"1"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Smoke Detector Request- DFR","count":"1"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Smoke Detector Request","count":"1"}
+,{"department":"Dallas Fire Rescue","service_request_type":"Night Detail: Parking in Fire Lane/ Fire Hydrants - DFR","count":"1"}
+,{"department":"Municipal Court & Detention Services","service_request_type":"TEST CRM","count":"1"}
+,{"department":"Office of Budget","service_request_type":"TEST CRM","count":"1"}
+,{"department":"Dallas Animal Services","service_request_type":"Animal confined- DAS","count":"1"}
+,{"department":"Transportation and Public Works Department","service_request_type":"test sr","count":"1"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Test CRM","count":"1"}
+,{"department":"Office of Emergency Management and Crisis Response","service_request_type":"Test SR","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Traffic Signal - Other Dispatch - TPW","count":"1"}
+,{"department":"Office of Housing and Community Empowerment","service_request_type":"TESTCRM","count":"1"}
+,{"department":"Parks Department","service_request_type":"Test CRM","count":"1"}
+,{"department":"Code Compliance","service_request_type":"test crm","count":"1"}
+,{"department":"Code Compliance","service_request_type":"single family rental needs registration","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Single Family Rental Inspection - CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Single Family Needs Registration - CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Single Family Needs Registration","count":"1"}
+,{"department":"Code Compliance","service_request_type":"single family needs registration","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Single Family Need Registration-CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Single Family need registration","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Report a parking violation-TRN","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Pool Complaint","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Neighborhood Code Tracking - CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Multi-Tenant Pool Inspection - CCS","count":"1"}
+,{"department":"Code Compliance","service_request_type":"Multi-Family","count":"1"}
+,{"department":"Code Compliance","service_request_type":"mosquitoes investigation - CCS","count":"1"}
+,{"department":"Planning & Development Department","service_request_type":"Historic/Conservation District Violation - DEV","count":"1"}
+,{"department":"Code Compliance","service_request_type":"illegal dumping abatement","count":"1"}
+,{"department":"Code Compliance","service_request_type":"illegal dump abatement","count":"1"}]
