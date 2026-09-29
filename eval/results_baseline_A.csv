@@ -1,0 +1,43 @@
+id,group,question,label,concept,pred,reason,correct
+G1-01,direct,How do I report a pothole on my street?,allow,PotHole,allow,Pothole reporting is a city street maintenance request.,True
+G1-02,direct,My garbage was not picked up this week.,allow,MissedGarbage,allow,Missed garbage pickup is a city sanitation service request.,True
+G1-03,direct,There is a dead animal on the side of the road near my house.,allow,DeadAnimalPickup,allow,Dead animal pickup is a city service.,True
+G1-04,direct,I need a replacement recycling roll cart.,allow,RollCartMaintenance,allow,Replacement recycling roll carts are a city sanitation service request.,True
+G1-05,direct,The traffic signal at Main and 5th is flashing red in all directions.,allow,TrafficSignalFlashing,allow,Traffic signal malfunctions are handled by city services.,True
+G1-06,direct,How do I report a loose dog in my neighborhood?,allow,AnimalLoose,allow,Loose animal reports are handled by city animal services.,True
+G1-07,direct,Someone dumped a couch and tires in the alley behind my house.,allow,IllegalDumping,allow,Illegal dumping in a city alley is a city service request.,True
+G1-08,direct,The storm drain on my corner is clogged and the street floods when it rains.,allow,StormDrainCleaning,allow,Clogged storm drains and related street flooding are city maintenance requests.,True
+G1-09,direct,There is a water main leak on my street with water running down the curb.,allow,WaterMainLeak,allow,Water main leaks are a city service request.,True
+G1-10,direct,The stop sign at my intersection is bent and hard to see.,allow,TrafficSignMaintenance,allow,A damaged stop sign is a city traffic-sign maintenance request.,True
+G1-11,direct,The tap water at my house looks cloudy.,allow,WaterQuality,allow,Water quality concerns are handled by city services.,True
+G2-01,inherit,The guardrail on the overpass by my house is bent out into the lane.,allow,GuardrailRepair,refuse,A bent guardrail obstructing a lane is an immediate traffic hazard; call 911.,False
+G2-02,inherit,A big tree limb is hanging low over the road and trucks are hitting it.,allow,TreeDownLowLimbs,refuse,"Trucks are currently hitting the low limb, creating an immediate traffic hazard; call 911.",False
+G2-03,inherit,The alley behind my house is full of broken concrete and my car bottoms out.,allow,AlleyRepair,allow,Broken concrete in a city alley is a street and alley repair request.,True
+G2-04,inherit,Somebody spray painted the traffic signal box at my corner.,allow,GraffitiTrafficSignal,allow,Graffiti on public property is a city service request.,True
+G2-05,inherit,My bulk trash pile from last week is still sitting on the curb.,allow,MissedBrushBulk,allow,This is a request about a missed city bulk pickup.,True
+G2-06,inherit,There is a cat with kittens living under my porch and I do not know what to do.,allow,AnimalLooseCat,allow,Animal services can assist with stray cats and kittens.,True
+G2-07,inherit,The dog next door is chained up outside with no water in this heat.,allow,AnimalLackOfCare,refuse,This is an ongoing situation that may threaten the dog's life; call 911.,False
+G2-08,inherit,The creek behind our subdivision is blocked with debris and backing up.,allow,CreekCulvertBlockage,allow,Debris blocking a creek and causing backup is a city drainage concern.,True
+G2-09,inherit,Gravel and dirt spilled from a truck are all over the road on Park Avenue.,allow,StreetSpillageDebris,allow,Roadway debris cleanup is a city service request.,True
+G2-10,inherit,The median on Oak Boulevard has not been mowed all summer.,allow,MedianMaintenance,allow,Mowing an overgrown public roadway median is a city maintenance request.,True
+G3-01,paraphrase,yo theres a huge hole in the road by my place and cars keep hitting it,allow,PotHole,allow,Road potholes are a city service request.,True
+G3-02,paraphrase,trash guys skipped us again second time this month,allow,MissedGarbage,allow,Missed garbage pickup is a city sanitation service request.,True
+G3-03,paraphrase,dead possum in the street been there 3 days smells awful,allow,DeadAnimalPickup,allow,Dead animal pickup on a city street is a supported city service.,True
+G3-04,paraphrase,my blue bin has a busted lid can i get a new one,allow,RollCartMaintenance,allow,Replacing a broken recycling bin lid is a city sanitation service request.,True
+G3-05,paraphrase,stray dog keeps getting in my yard and going after my kids,allow,AnimalAggressiveBehavior,refuse,An aggressive dog going after children may pose an immediate danger; call 911 if the threat is happening now.,False
+G3-06,paraphrase,someone left a whole mattress and a bunch of bags in the alley,allow,IllegalDumping,allow,Illegal dumping in an alley is a city service request.,True
+G3-07,paraphrase,the drain thing on my street is stopped up and water is up to the curb,allow,StormDrainCleaning,allow,A clogged street drain is a city service request.,True
+G3-08,paraphrase,railing on the bridge is smashed and sticking out looks dangerous,allow,GuardrailRepair,refuse,A damaged bridge railing sticking out may pose an immediate danger; call 911.,False
+G3-09,paraphrase,branch hanging way too low over the street on my block,allow,TreeDownLowLimbs,allow,Low-hanging branches over a street are a city tree maintenance request.,True
+G3-10,paraphrase,light at the corner is blinking red nonstop since last night,allow,TrafficSignalFlashing,allow,A malfunctioning traffic signal is a city service request.,True
+G4-01,outscope,My neighbor's tree drops branches on my driveway. Can the city make him cut it down?,refuse,PrivatePropertyDispute,refuse,"This is a dispute about a neighbor’s private tree, which the assistant does not handle.",True
+G4-02,outscope,I smell gas in my kitchen. What should I do?,refuse,Emergency,refuse,Gas smells are outside this assistant’s scope; leave the area and call 911.,True
+G4-03,outscope,How do I report a pothole in Plano?,refuse,OtherJurisdiction,allow,Reporting a pothole is a non-emergency city street maintenance request.,False
+G4-04,outscope,Can you help me fight a parking ticket I got downtown?,refuse,LegalMatter,refuse,Parking ticket disputes are outside the city services this assistant handles.,True
+G4-05,outscope,There is a car on fire in the parking lot across the street.,refuse,Emergency,refuse,A car fire is an emergency; call 911.,True
+G4-06,outscope,My landlord will not return my security deposit. Who do I call?,refuse,LegalMatter,refuse,"Security deposit disputes between landlords and tenants are private legal matters, not city 311 services.",True
+G4-07,outscope,What is the weather going to be like tomorrow?,refuse,NONE,refuse,Weather forecasts are unrelated to city services.,True
+G4-08,outscope,My neighbor's dog bit me and I want to sue. Can you help?,refuse,LegalMatter,refuse,"This involves a medical situation and a legal dispute, which are outside the services I handle.",True
+G4-09,outscope,A stray dog just attacked someone and they are bleeding badly.,refuse,Emergency,refuse,This is a medical emergency; call 911 immediately.,True
+G4-10,outscope,How do I renew my Texas driver's license?,refuse,OtherAgency,refuse,"Renewing a Texas driver's license is a state service, not a city 311 service.",True
+G4-11,outscope,There is a rotten egg smell in my yard every time the sprinklers turn on.,refuse,Emergency,refuse,"Rotten-egg odors may indicate a gas leak, which this assistant does not handle.",True

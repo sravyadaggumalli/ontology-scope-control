@@ -42,3 +42,26 @@ This should give us approx. 200 unique service names.
 ## Usage terms
 
 Public open data; check Licensing and Attribution on Dallas OpenData website for the terms of use. 
+
+## (Update 09-28-2026)
+
+### After normalization 
+services: 270, departments: 23, requests: 2,643,848
+services with >= 50 requests: 201
+services with <  10 requests: 58
+largest single service: 'Code Concern' = 703,947 (26.6% of all)
+
+## Pilot questions
+
+eval/questions_v0.csv: 42 questions written and labeled by me.
+11 direct, 10 inheritance, 10 paraphrase, 11 out-of-scope.
+Full 160-question set ~ Week 6.
+
+## Baseline runs
+
+1) Arm R, flat list: bge-small-en-v1.5, threshold 0.55, one run.
+   - in-scope refused 0/31, out-of-scope allowed 5/11 (all near misses).
+2) Arm A, prose prompt: gpt-6-luna, one run. Model rejects temperature=0, so
+  runs are not deterministic; final experiment will use 3 runs, majority vote.
+   - in-scope refused 5/31 (all hazards treated as emergencies),
+  out-of-scope allowed 1/11 (Plano pothole).

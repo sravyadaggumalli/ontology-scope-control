@@ -5,6 +5,8 @@
 % \usepackage{lmodern}  % optional: uncomment if installed
 % \usepackage{microtype} % optional
 \usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 \usepackage{titlesec}
 \usepackage{parskip}
@@ -37,7 +39,7 @@ This project analyses whether a structured scope specification, an ontology wher
 
 \section{Related Work/Background}
 
-There is a lot of recent work on runtime policy enforcement for LLM agents, including AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, PCAS~\cite{pcas}, Agent Behavioral Contracts~\cite{abc}, and a recent paper on what runtime gates can enforce~\cite{ray2026}. Most of it focuses on which tools an agent may call rather than what it may talk about, and in the papers I reviewed none uses description logic or inheritance over a domain hierarchy. Ontology-based agent policy was tried in the 2000s (KAoS~\cite{kaos}, Rei~\cite{rei}) but has not been revisited for LLMs. NeMo Guardrails~\cite{nemo} comes closest with topical rails, but has no hierarchy. I did not find an empirical comparison of hierarchical scope specification against prose for conversational scope, which is the gap this project aims to fill.
+There is a lot of recent work on runtime policy enforcement for LLM agents, including AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, Agent Behavioral Contracts~\cite{abc}, and a recent paper on what runtime gates can enforce~\cite{ray2026}. Most of it focuses on which tools an agent may call rather than what it may talk about, and in the papers I reviewed none uses description logic or inheritance over a domain hierarchy. Ontology-based agent policy was tried in the 2000s (KAoS~\cite{kaos}, Rei~\cite{rei}) but has not been revisited for LLMs. NeMo Guardrails~\cite{nemo} comes closest with topical rails, but has no hierarchy. I did not find an empirical comparison of hierarchical scope specification against prose for conversational scope, which is the gap this project aims to fill.
 
 \section{Research Questions}
 
@@ -53,13 +55,20 @@ The hardest part is matching a user's question to the right concept in the ontol
 
 \section{Dataset}
 
-I will use the Dallas 311 Service Requests open data~\cite{dallas311} in summary form only: a grouped query gives the departments and roughly 400 request types with their counts, and I build the ontology from that list. No individual records, addresses, or locations are used. Since the data only shows what the city handles, I plan to write the out-of-scope cases myself (emergencies, private property disputes, legal advice, other cities) from the public 311 help pages.
+I use the Dallas 311 Service Requests open data, October 2020 to present~\cite{dallas311}, in aggregate only: one grouped query returns department and request-type counts (435 rows, about 2.6 million requests). After stripping department codes from the type names, merging duplicate department labels, and dropping test records, 270 services remain across 23 departments, 201 with at least 50 requests (Fig.~\ref{fig:taxonomy}). No individual records or locations are used.
 
-For testing I will build 160 questions in four groups of 40: questions that name a service directly, questions about a specific service where only its parent category was permitted, reworded or informal versions of those, and questions that should be refused. I will draft candidates with an LLM from the request-type list (without showing it the ontology), then review, edit, and label each one by hand with allow/refuse and the concept it belongs to. Someone not involved with the project will label 40 of them independently so I can report theagreement. From each group, 10 questions go to tuning and 30 to the test set, which is fixed before any results are checked. The scope model is a dummy city, not Dallas's actual policy.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/taxonomy_overview.png}
+\caption{Dallas 311 requests by department (left) and across all services sorted by volume, log scale (right).}
+\label{fig:taxonomy}
+\end{figure}
+
+The pilot evaluation set has 42 hand-written questions in four groups: direct (11), inheritance-dependent (10), paraphrase (10), and out-of-scope (11), each labeled allow or refuse with its concept. The out-of-scope group is built from near misses that reuse 311 vocabulary. The full 160-question set with a second labeler is scheduled for Week 6.
 
 \section{Proposed AI Approach}
 
-All approaches take a question and return \textbf{allow} or \textbf{refuse} with a short reason. No chat interface or answer text is built and the decision is used as a measure.
+Each apporach takes a question and returns \textbf{allow} or \textbf{refuse} with a short reason. No chat interface or answer text is built and the decision is used as a measure.
 
 \begin{itemize}\setlength{\itemsep}{1pt}
   \item \textbf{(A) Prose prompt.} A system prompt describing what the assistant covers, run through a small hosted LLM.
@@ -73,6 +82,27 @@ All approaches take a question and return \textbf{allow} or \textbf{refuse} with
   \end{itemize}
   \item \textbf{(D) Ontology with gold concept.} Same as C but the correct concept comes from my labels, skipping matching. A diagnostic upper bound, not a usable system.
 \end{itemize}
+
+\subsection{Baselines and pilot result}
+
+The primary baseline is the prose system prompt, which is what AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, and NeMo Guardrails~\cite{nemo} all compare against and what practitioners deploy. The second baseline is a flat list of concepts matched by embedding similarity, the same approach NeMo's topical rails use. It is built from same concepts, embedding model, and threshold as the ontology arm, so the only difference between the flat list and the ontology arm is the heirarchy. Table~\ref{tab:baseline} shows both on the pilot set. The prompt model (gpt-6-luna) does not accept a temperature setting, so the final experiment will use three runs with majority voting.
+
+\begin{table}[h]
+\centering
+\caption{Baseline results on the 42-question pilot set (31 in-scope, 11 out-of-scope).}
+\label{tab:baseline}
+\begin{tabular}{lcc}
+\toprule
+Baseline & Out-of-scope allowed & In-scope refused \\
+\midrule
+Flat list (R) & 5/11 & 0/31 \\
+Prompt (A)    & 1/11 & 5/31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two fail in opposite directions. The flat matcher refused no in-scope questions but allowed 5 of 11 near misses. The prompt allowed only one, but refused 5 in-scope questions, each time because it classified a hazardous but routine report (bent guardrail, low limb, chained dog) as an emergency. This suggests the ontology will need hazardous-but-routine concepts under permitted parents, separate from a denied Emergency concept.
+
 
 \section{Evaluation Plan}
 
@@ -94,9 +124,7 @@ A small, reproducible comparison of prose, blocklist, flat-list, and hierarchica
 
 \bibitem{agentspec} H.~Wang, C.~M. Poskitt, and J.~Sun. AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents. \emph{Proc.\ ICSE 2026}. arXiv:2503.18666.
 
-\bibitem{forge} Formal Policy Enforcement for Real-World Agentic Systems (FORGE). arXiv:2602.16708, 2026.
-
-\bibitem{pcas} PCAS: Policy Compiler for Secure Agentic Systems. arXiv, 2026.
+\bibitem{forge} N.~Palumbo, S.~Choudhary, J.~Choi, G.~Amir, P.~Chalasani, and S.~Jha. Formal Policy Enforcement for Real-World Agentic Systems. arXiv:2602.16708, 2026.
 
 \bibitem{abc} V.~P. Bhardwaj. Agent Behavioral Contracts: Formal Specification and Runtime Enforcement for Reliable Autonomous AI Agents. arXiv:2602.22302, 2026.
 
@@ -110,7 +138,8 @@ A small, reproducible comparison of prose, blocklist, flat-list, and hierarchica
 
 \bibitem{owlready} J.-B. Lamy. Owlready: Ontology-Oriented Programming in Python with Automatic Classification and High Level Constructs for Biomedical Ontologies. \emph{Artificial Intelligence in Medicine} 80:11--28, 2017.
 
-\bibitem{dallas311} City of Dallas. 311 Service Requests, October 1, 2000 to Present [dataset]. Dallas OpenData, id 4n3h-rfqm. \url{https://www.dallasopendata.com/Services/311-Service-Requests-October-1-2000-to-Present/4n3h-rfqm}
+\bibitem{dallas311} City of Dallas. 311 Service Requests October 1, 2020 to Present [dataset]. Dallas OpenData, id d7e7-envw. Accessed Sep. 2026. \url{https://www.dallasopendata.com/Services/311-Service-Requests/d7e7-envw}
+
 
 \end{thebibliography}
 
