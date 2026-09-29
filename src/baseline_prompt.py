@@ -1,7 +1,9 @@
 """Baseline A: prose system prompt on a small hosted LLM.
 
-Each question is sent with the scope prompt at temperature 0; the model must
-return JSON {"decision": "allow"|"refuse", "reason": "..."}.
+Each question is sent with the scope prompt; the model must
+return JSON {"decision": "allow"|"refuse", "reason": "..."}. The model family used
+(gpt-6-luna) does not accept a temperature setting, so output is not
+deterministic; the final experiment will use majority verdict per question from three calls.
 
 Usage:
     OPENAI_API_KEY=... python src/baseline_prompt.py eval/questions_v0.csv
