@@ -1,45 +1,79 @@
-\documentclass[10.5pt,letterpaper]{article}
-\usepackage[margin=0.75in]{geometry}
-% \usepackage[T1]{fontenc}  % optional
-\usepackage[utf8]{inputenc}
-% \usepackage{lmodern}  % optional: uncomment if installed
-% \usepackage{microtype} % optional
-\usepackage{url}
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{array}
 \usepackage{booktabs}
-\usepackage[hidelinks]{hyperref}
-\usepackage{titlesec}
-\usepackage{parskip}
-\usepackage{enumitem}
-\setlist{nosep,leftmargin=1.2em}
-
-\titleformat{\section}{\large\bfseries}{}{0pt}{}
-\titlespacing*{\section}{0pt}{0.9em}{0.2em}
-\setlength{\parskip}{0.5em}
-\urlstyle{same}
+\usepackage{ragged2e}
+\usepackage{url}
 
 \begin{document}
 
-\begin{center}
-{\Large\bfseries CSC789 - AI Capstone Project Proposal}
-\end{center}
+\title{Ontology-Based Scope Control for Conversational Agents: A Comparison with Prose and Blocklist Baselines}
 
-\vspace{0.5em}
-\noindent\textbf{Title:} Ontology-Based Scope Control for Conversational Agents: A Comparison with Prose and Blocklist Baselines
+\author{\IEEEauthorblockN{Sravya Daggumalli}
+\IEEEauthorblockA{\textit{CSC789 AI Capstone} \\
+\textit{Dakota State University}\\
+Madison, SD, USA}
+}
 
-\noindent\textbf{Project track:} Track A: Research
+\maketitle
 
-\noindent\textbf{Student name:} Sravya Daggumalli (individual)
+\begin{abstract}
+LLM-based conversational agents are usually told what they may respond to through a free-text system prompt, most often a list of forbidden topics. Such prompts cannot be checked for contradictions, miss cases their author did not anticipate, and do not let a permission on a broad category carry down to the narrower cases inside it. This project tests whether an ontology in which permissions are attached to concepts and inherited through the hierarchy makes better allow/refuse decisions for a city 311 assistant than a prose prompt, a blocklist, or a flat topic list, on the same set of questions. A pilot evaluation of the two baselines on 42 questions shows them failing in opposite directions: the flat list refuses nothing in scope but lets near-miss questions through, while the prompt catches near misses but refuses hazardous-but-routine requests as emergencies.
+\end{abstract}
 
-\section{Problem and Motivation}
+\begin{IEEEkeywords}
+conversational agents, guardrails, ontology, OWL, scope control, LLM
+\end{IEEEkeywords}
 
-Today it is common practice to tell LLM-based conversational agents what they may respond to through a free-text system prompt, and those instructions are usually a list of things the agent must not do. I ran into three problems with this while building agent guardrails on Azure AI Foundry for a personal project. There is no good way to check a prose prompt for contradictions or gaps except by trying questions one at a time. A blocklist can miss related cases its author did not anticipate prior. And permissions do not inherit: allowing a broad category does not reliably allow the narrower cases inside it unless each one is spelled out. Vendor guardrails cover fixed harm categories like hate or self-harm, not what a specific agent is supposed to be \emph{for}.
+\section{Introduction}
 
-This project analyses whether a structured scope specification, an ontology where permissions are attached to concepts and a permission on a parent concept carries down to its children, makes better allow/refuse decisions than a prose prompt or a blocklist, and what it costs to build it.
+Today it is common practice to tell LLM-based conversational agents what they may respond to through a free-text system prompt, and those instructions are usually a list of things the agent must not do. I ran into three problems with this while building agent guardrails on Azure AI Foundry for a personal project. There is no good way to check a prose prompt for contradictions or gaps except by trying questions one at a time. A blocklist can miss related cases its author did not anticipate. And permissions do not inherit: allowing a broad category does not reliably allow the narrower cases inside it unless each one is spelled out. Vendor guardrails cover fixed harm categories like hate or self-harm, not what a specific agent is supposed to be \emph{for}.
 
-\section{Related Work/Background}
+This project analyses whether a structured scope specification, an ontology where permissions are attached to concepts and a permission on a parent concept carries down to its children, makes better allow/refuse decisions than a prose prompt or a blocklist, and what it costs to build it. The point is not the use of an ontology by itself but the comparison: whether hierarchy and inheritance give better conversational scope control than prompt-based and flat approaches on the same questions.
 
-There is a lot of recent work on runtime policy enforcement for LLM agents, including AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, Agent Behavioral Contracts~\cite{abc}, and a recent paper on what runtime gates can enforce~\cite{ray2026}. Most of it focuses on which tools an agent may call rather than what it may talk about, and in the papers I reviewed none uses description logic or inheritance over a domain hierarchy. Ontology-based agent policy was tried in the 2000s (KAoS~\cite{kaos}, Rei~\cite{rei}) but has not been revisited for LLMs. NeMo Guardrails~\cite{nemo} comes closest with topical rails, but has no hierarchy. I did not find an empirical comparison of hierarchical scope specification against prose for conversational scope, which is the gap this project aims to fill.
+\section{Background and Related Work}
+
+Table~\ref{tab:related} summarizes the eight papers reviewed. They fall into three groups.
+
+\subsection{Runtime policy enforcement for tool-using agents}
+The most active recent work puts a policy layer between an LLM agent and the actions it takes. AgentSpec~\cite{agentspec} writes rules as trigger, check, and enforcement, evaluated before each tool call and kept outside the model; it blocks over 90\% of unsafe code executions in its benchmarks at millisecond overhead. FORGE~\cite{forge} treats policy as a cross-cutting concern in the aspect-oriented sense: a weaver instruments the agent system and a reference monitor checks each action against Datalog rules over a dependency graph, with static checks for contradiction and redundancy. Agent Behavioral Contracts~\cite{abc} bring design-by-contract to agents with preconditions, invariants, and recovery. Ray~\cite{ray2026} asks what a gate in front of tool calls can guarantee at all and formalizes the trade-off between false blocks and misses. These systems share two things: they govern which tool an agent may call, not what it may say, and their rules are flat or Datalog, so a permission at a general concept does not carry down to specific cases. What I take from them is the placement of the policy outside the agent, applied at every decision point.
+
+\subsection{Staying on topic in dialogue}
+A second group treats scope as a dialogue problem. NeMo Guardrails~\cite{nemo} lets developers write topical rails: a user message is mapped to a canonical form by embedding similarity and a dialogue flow decides what happens next. The topics are a flat list matched by similarity, which is what my flat-list baseline is. CantTalkAboutThis~\cite{ctat} fine-tunes the model on synthetic dialogues with distractor turns across nine domains; its human-written distractors turn out much harder than the synthetic ones (GPT-4-turbo reaches F1 0.68 on them). EnSToM~\cite{enstom} keeps small models on topic without training by steering activations at inference, raising distractor accuracy on LLaMA-2-7B from 0.28 to 0.81. These papers measure the same two errors I measure, off-topic questions answered and on-topic questions refused. The difference is where the scope lives: inside the model weights or activations in the last two, with nothing to inspect or check, or as a flat list with no inheritance in NeMo.
+
+\subsection{Ontology-based agent policy before LLMs}
+The idea of expressing agent policy in OWL goes back to the early days of semantic web technologies. KAoS~\cite{kaos} represented authorizations and obligations as OWL classes, used a reasoner to find which policies applied to an action, and detected and resolved conflicts between policies, with lookups under a millisecond in deployments of over a thousand agents. Rei~\cite{rei} took a similar approach for pervasive computing. This work targeted the software agents of its time and was never compared against prompt-based control, since LLM agents did not exist. It is the approach mine builds on. The KAoS authors also noted that OWL-DL alone could not express some policies they needed, which is one reason I keep the permission lookup in a small procedural step and use the reasoner for hierarchy consistency and conflict detection.
+
+\subsection{Gap and contribution}
+The first group enforces actions, not conversation. The second handles conversation but either inside the model or as a flat list. The third has hierarchy and conflict detection but predates LLMs and was never measured against prompting. In the papers I reviewed I did not find an empirical comparison of a hierarchical, checkable scope specification against prompt-based control for conversational scope. That is what this project does: the same questions, the same embedding model, a prose prompt, a flat list, and an ontology with inherited permissions, so that the effect of the hierarchy can be measured on its own.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Related work comparison. P = peer-reviewed; pre = arXiv preprint. Rows 1--4: runtime policy enforcement for tool-using agents; 5--7: staying on topic in dialogue; 8: ontology-based agent policy before LLMs.}
+\label{tab:related}
+\begin{tabular}{@{}c >{\RaggedRight}p{1.9cm} >{\RaggedRight}p{1.8cm} >{\RaggedRight}p{1.8cm} >{\RaggedRight}p{2.2cm} >{\RaggedRight}p{1.6cm} >{\RaggedRight}p{1.8cm} >{\RaggedRight}p{2.0cm} >{\RaggedRight}p{2.5cm}@{}}
+\toprule
+\# & Paper & Problem & Dataset & Method & Baseline & Evaluation & Main finding & Limitation / relevance \\
+\midrule
+1 & AgentSpec, ICSE 2026~\cite{agentspec} (P) & LLM agents taking unsafe actions at runtime & RedCode-Exec (code), SafeAgentBench (embodied), FixDrive (driving) & Rules written in a small language: trigger, check, enforce; checked before each action, outside the model & Same agents with no rules & Share of unsafe actions blocked; runtime overhead; precision/recall of LLM-written rules & Blocks over 90\% of unsafe code runs, all embodied hazards, all driving violations, at millisecond overhead & Rules are flat and act on tool calls; nothing about what the agent may or may not talk about. This is closest to my decision layer. \\
+2 & FORGE, arXiv 2026~\cite{forge} (pre) & Enforcing security and organizational policies across single and multi-agent systems & Prompt-injection tasks, $\tau^2$-bench customer service, MALADE pharmacovigilance pipeline & Treats policy as a cross-cutting concern (aspect-oriented programming, AOP): an aspect weaver instruments the agent system, a reference monitor checks each action against Datalog rules over a causal dependency graph; static checks for contradiction, redundancy, subsumption & Same systems with the policy specified only in the prompt & Attack success, policy compliance, task success, latency and cost & Injection attacks 100\% to 0\%; $\tau^2$-bench compliance 58\% to 98\%; latency up 19--38\% & Enforces actions, not conversation. Its static checks are over rules, not a domain concept hierarchy. The weaver idea (policy outside the agent, applied at every decision point) and the contradiction check both can be mapped to my design. \\
+3 & Agent Behavioral Contracts, arXiv 2026~\cite{abc} (pre) & Agents drifting from intended behavior with no formal spec & Agent\-Contract-Bench: 200 scenarios, 7 domains; 1,980 sessions on 7 models & Design-by-contract for agents: preconditions, invariants, governance, recovery; probabilistic compliance and a drift bound & Same agents without contracts & Violations detected per session, hard-constraint compliance, drift, recovery rate, overhead & Contracted agents catch 5--7 violations per session that baselines miss; 88--100\% hard compliance; under 10 ms overhead & Contracts on actions and outputs; no domain scope model. Patent pending; code not available. \\
+4 & What Can Be Enforced?, arXiv 2026~\cite{ray2026} (pre) & What a runtime gate in front of tool calls can guarantee & AgentDojo task plans (132 items) scored by 23 judges; small controlled models & Theory: which policies a deterministic gate can represent; false-block vs.\ miss trade-off; conformal calibration; closed-loop effects & None (theory plus diagnostics) & Proofs; static diagnostic on judges; paired closed-loop reruns & Guarantees depend on what the gate can represent and observe; benign calibration does not survive representation attacks & Studies the same two errors I measure (wrongly allowed, wrongly refused), for tool calls rather than questions. Like the others, it covers tool calls only, not conversation. \\
+5 & NeMo Guardrails, EMNLP 2023 Demo~\cite{nemo} (P) & Keeping LLM apps on topic and safe with developer-defined rules & Chit-chat and banking NLU sets (76--77 intents, about 230 test samples each) & Colang rails: user message mapped to a canonical form by embedding similarity plus few-shot LLM, then a dialogue flow decides the next step & Same LLMs with plain prompting & Canonical form and next step accuracy; harmful blocked vs.\ helpful allowed for moderation rails & Topical rails work even with 7B--13B open models; a similarity match beats exact match for canonical forms & Topics are a flat list matched by similarity, which is my baseline R. No inheritance, no consistency check. \\
+6 & CantTalk\-About\-This, Findings EMNLP 2024~\cite{ctat} (P) & LLMs answering off-topic turns in task-oriented chat & 1,080 synthetic dialogues, 9 domains, with distractor turns; plus 20 banking dialogues with human-written distractors & Fine-tune on the dataset so the model refuses distractors & GPT-4-turbo, GPT-3.5-turbo, Mixtral-Instruct, untuned base models & Precision, recall, F1 on distractor and on-topic turns & Fine-tuned models reach F1 0.84--0.89 on human distractors vs.\ 0.68 for GPT-4-turbo; all models drop on human-written distractors & Scope lives inside the model weights; no external spec to check. Its human distractors are a model for my hard out-of-scope cases. \\
+7 & EnSToM, Findings ACL 2025~\cite{enstom} (P) & Small open LLMs failing to refuse off-topic turns in service chatbots & CantTalk\-About\-This banking domain: 100 samples to build steering vectors, 550 distractor and 550 on-topic test samples; GPT-4o judges refuse vs.\ engage & Steering vector added at a middle layer at inference, with strength scaled by the model's output entropy; no training & Same model with prompt only; fixed-strength steering & Distractor accuracy (correct refusals) and on-topic accuracy (correct answers) & On LLaMA-2-7B-Chat, distractor accuracy 0.28 to 0.81 while on-topic stays about 0.90; similar gain on Ministral-8B & Same trade-off I measure, but the fix is inside the model and not auditable. Also shows how weak a plain prompt is on small models. \\
+8 & KAoS, IEEE Intelligent Systems 2004~\cite{kaos} (P) & Policy control for software agents and Semantic Web services & None; three applications (grid computing, coalition search and rescue, semantic firewall) & Policies as OWL classes: positive/negative authorization and obligation; reasoner classifies actions, finds and resolves policy conflicts & Compared in prose to Rei and Ponder & Qualitative; disclosure query under 1 ms; scales to 1,000+ agents & OWL lets the same reasoner do policy lookup, conflict detection, and harmonization & Pre-LLM agents, never compared with prompting. The approach mine builds on; I take its point that OWL-DL alone could not express some policies. \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \section{Research Questions}
 
@@ -51,7 +85,7 @@ There is a lot of recent work on runtime policy enforcement for LLM agents, incl
 
 \section{Project Challenges}
 
-The hardest part is matching a user's question to the right concept in the ontology. If the match is wrong, the reasoning on top of it cannot help, so I will measure this by running the ontology once with automatic matching and once with the correct concept supplied from my labels. When nothing matches, the system refuses, which is right for out-of-scope questions but wrong for in-scope ones, and I will report how often that happens. The prose and blocklist baselines need to be strong for the comparison to mean anything, so I will tune them on a small held-out set before the test set is fixed. Finally, the Dallas export I have covers only one department, so I plan to pull the full request-type list through an aggregate query on the open data portal.
+The hardest part is matching a user's question to the right concept in the ontology. If the match is wrong, the reasoning on top of it cannot help, so I will measure this by running the ontology once with automatic matching and once with the correct concept supplied from my labels. When nothing matches, the system refuses, which is right for out-of-scope questions but wrong for in-scope ones, and I will report how often that happens. The prose and blocklist baselines need to be strong for the comparison to mean anything, so I will tune them on a small held-out set before the test set is fixed. Finally, the Dallas export I have covers only one department, so I pull the full request-type list through an aggregate query on the open data portal.
 
 \section{Dataset}
 
@@ -68,7 +102,7 @@ The pilot evaluation set has 42 hand-written questions in four groups: direct (1
 
 \section{Proposed AI Approach}
 
-Each apporach takes a question and returns \textbf{allow} or \textbf{refuse} with a short reason. No chat interface or answer text is built and the decision is used as a measure.
+Each approach takes a question and returns \textbf{allow} or \textbf{refuse} with a short reason. No chat interface or answer text is built; the decision is what is evaluated. Approaches A and R serve as the baselines.
 
 \begin{itemize}\setlength{\itemsep}{1pt}
   \item \textbf{(A) Prose prompt.} A system prompt describing what the assistant covers, run through a small hosted LLM.
@@ -83,27 +117,6 @@ Each apporach takes a question and returns \textbf{allow} or \textbf{refuse} wit
   \item \textbf{(D) Ontology with gold concept.} Same as C but the correct concept comes from my labels, skipping matching. A diagnostic upper bound, not a usable system.
 \end{itemize}
 
-\subsection{Baselines and pilot result}
-
-The primary baseline is the prose system prompt, which is what AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, and NeMo Guardrails~\cite{nemo} all compare against and what practitioners deploy. The second baseline is a flat list of concepts matched by embedding similarity, the same approach NeMo's topical rails use. It is built from same concepts, embedding model, and threshold as the ontology arm, so the only difference between the flat list and the ontology arm is the heirarchy. Table~\ref{tab:baseline} shows both on the pilot set. The prompt model (gpt-6-luna) does not accept a temperature setting, so the final experiment will use three runs with majority voting.
-
-\begin{table}[h]
-\centering
-\caption{Baseline results on the 42-question pilot set (31 in-scope, 11 out-of-scope).}
-\label{tab:baseline}
-\begin{tabular}{lcc}
-\toprule
-Baseline & Out-of-scope allowed & In-scope refused \\
-\midrule
-Flat list (R) & 5/11 & 0/31 \\
-Prompt (A)    & 1/11 & 5/31 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The two fail in opposite directions. The flat matcher refused no in-scope questions but allowed 5 of 11 near misses. The prompt allowed only one, but refused 5 in-scope questions, each time because it classified a hazardous but routine report (bent guardrail, low limb, chained dog) as an emergency. This suggests the ontology will need hazardous-but-routine concepts under permitted parents, separate from a denied Emergency concept.
-
-
 \section{Evaluation Plan}
 
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -111,38 +124,54 @@ The two fail in opposite directions. The flat matcher refused no in-scope questi
   \item \textbf{Comparison:} McNemar's test between approaches (all see the same questions), plus a table of which questions each approach got wrong.
   \item \textbf{Qualitative:} the inheritance path used for questions that depend on it; the reasoner catching a concept marked both permitted and denied before any question is run.
   \item \textbf{Expected result:} the ontology does best on inheritance-dependent questions, loses some on reworded questions to matching errors, and differs little on questions that name a service directly.
-  \item \textbf{Schedule:} taxonomy, questions, and ontology by Week 6; runs and analysis Weeks 7-9; and a report after that. API should cost under \$30; everything else runs on my computer.
+  \item \textbf{Schedule:} taxonomy, questions, and ontology by Week 6; runs and analysis Weeks 7--9; report after that. API should cost under \$30; everything else runs on my computer.
 \end{itemize}
 
-\section{Expected Contribution / Value}
+\section{Baseline Results}
 
-A small, reproducible comparison of prose, blocklist, flat-list, and hierarchical scope policies on a constructed 311 benchmark, produced with the question set and ontology. It will show whether inheritance helps, how much is lost to automatic matching, and that a structured policy can be checked for conflicts before use. If a well-tuned prompt matches the ontology at this scale, that is still a useful result about when a formal specification is worth the effort.
+The primary baseline is the prose system prompt, which is what AgentSpec~\cite{agentspec}, FORGE~\cite{forge}, and NeMo Guardrails~\cite{nemo} all compare against and what practitioners deploy. The second is a flat list of concepts matched by embedding similarity, the same approach NeMo's topical rails use; it is built from the same concepts, embedding model, and threshold as the ontology arm, so the only difference between the flat list and the ontology arm is the hierarchy.
 
-\begin{thebibliography}{10}
-\setlength{\itemsep}{0pt}
-\scriptsize
+Both were evaluated on the 42-question pilot set (Table~\ref{tab:baseline}, Fig.~\ref{fig:baseline}). The prompt model (gpt-6-luna) does not accept a temperature setting, so it was run three times and the majority verdict scored; 3 of 42 verdicts changed between runs. The flat list was run with two concept lists: the pilot list, whose descriptions I wrote by hand after the questions existed, and a second list whose descriptions are taken verbatim from the Dallas service names with no wording of my own. The second list is the fair comparison, because its descriptions were written without any knowledge of the test questions. A higher threshold (0.65) was also tried to see whether it separates near misses from in-scope questions.
 
-\bibitem{agentspec} H.~Wang, C.~M. Poskitt, and J.~Sun. AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents. \emph{Proc.\ ICSE 2026}. arXiv:2503.18666.
+\begin{table}[h]
+\centering
+\caption{Baseline error rates on the 42-question pilot set (31 in-scope, 11 out-of-scope). Concept accuracy is the share of in-scope questions matched to the correct concept, not just a permitted one.}
+\label{tab:baseline}
+\begin{tabular}{lccc}
+\toprule
+Run & Out-of-scope allowed & In-scope refused & Concept acc. \\
+\midrule
+Flat, hand-written descr., t=0.55 & 5/11 & 0/31 & 30/31 \\
+Flat, taxonomy descr., t=0.55     & 6/11 & 1/31 & 19/31 \\
+Flat, hand-written descr., t=0.65 & 5/11 & 1/31 & 30/31 \\
+Prompt, majority of 3 runs        & 1/11 & 6/31 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\bibitem{forge} N.~Palumbo, S.~Choudhary, J.~Choi, G.~Amir, P.~Chalasani, and S.~Jha. Formal Policy Enforcement for Real-World Agentic Systems. arXiv:2602.16708, 2026.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/baseline_results.png}
+\caption{Out-of-scope questions allowed and in-scope questions refused for each baseline run.}
+\label{fig:baseline}
+\end{figure}
 
-\bibitem{abc} V.~P. Bhardwaj. Agent Behavioral Contracts: Formal Specification and Runtime Enforcement for Reliable Autonomous AI Agents. arXiv:2602.22302, 2026.
+\section{Discussion of Baseline Results}
 
-\bibitem{ray2026} S.~Ray. What Can Be Enforced? A Theory of Certified Runtime Safety for Tool-Using Agents. arXiv:2607.22868, 2026.
+\textbf{Main findings.} The two baselines fail in opposite directions. The flat list refused none of the 31 in-scope questions but allowed 5 of the 11 out-of-scope ones, and every miss was a near miss that reuses 311 vocabulary: the neighbor's tree matched tree maintenance, the pothole in Plano matched pothole repair, the dog-bite lawsuit matched animal neglect. Similarity matching gets the topic right and ignores location, intent, and who is responsible.  Where as the prompt version allowed only the Plano pothole but refused 6 in-scope questions, and in every case its stated reason was that a hazard (a bent guardrail, a limb hitting trucks, a chained dog) was an emergency. Dallas 311 has request types for all of these. The same pothole with and without the words "cars keep hitting it" got opposite verdicts, so the wording triggers the refusal, not the topic. Replacing my hand-written concept descriptions with the city's own service names barely changed the flat list's verdicts, but 12 of 31 in-scope questions then matched the wrong concept; the verdicts held only because most concepts are permitted, so a wrong match still returned allow. Moreover raising the threshold to 0.65 did not separate near misses (scores 0.66 to 0.73) from real requests (down to 0.60). The prompt is also not repeatable due to non-determinism: 3 of 42 verdicts changed across three runs, and its reasons varied even when the verdict did not.
 
-\bibitem{kaos} A.~Uszok, J.~M. Bradshaw, et al. KAoS Policy and Domain Services: Toward a Description-Logic Approach to Policy Representation, Deconfliction, and Enforcement. \emph{IEEE POLICY 2003}.
+\textbf{Limitations.} This is a pilot on 42 questions, all written and labeled by me. The hand-written concept list was built after seeing the questions, which is biased for the flat list; the taxonomy-only list corrects this and is the one to be used from now on. The threshold was picked as starting value rather than tuned on a held-out split. One embedding model and one LLM were used, and three prompt runs is a small sample of its variability. The numbers just show us the direction for now not any meaningful differences statistically.
 
-\bibitem{rei} L.~Kagal, T.~Finin, and A.~Joshi. A Policy Language for a Pervasive Computing Environment. \emph{IEEE POLICY 2003}.
+\textbf{What should be improved.} I have piloted with 42 questions but the real experiment needs to be conducted with a larger dataset. The questions I aimed initially is 160 with a tuning/test split, questions written by someone who is unaware of the ontology, plus a second labeler on a sample. The threshold should be tuned on the tuning split only and then frozen. For the ontology, concept accuracy matters more than verdict accuracy, since inheritance starts from the matched concept; with taxonomy-only descriptions it is 61\%, so the ontology's labels need alternate names drawn from the Dallas data rather than from the test questions. The pilot also showed two design requirements: hazardous-but-routine concepts must sit under permitted parents, separate from a denied Emergency concept so that they inherit permission, and denied concepts such as OtherJurisdiction and LegalMatter must be matched explicitly so near misses are refused with a valid reason. Finally, the ontology should be reported alongside the oracle condition with the gold concept supplied, to separate matching error from policy error.
 
-\bibitem{nemo} T.~Rebedea et al. NeMo Guardrails: A Toolkit for Controllable and Safe LLM Applications with Programmable Rails. \emph{EMNLP 2023 System Demonstrations}.
+\section{Expected Contribution}
 
-\bibitem{owlready} J.-B. Lamy. Owlready: Ontology-Oriented Programming in Python with Automatic Classification and High Level Constructs for Biomedical Ontologies. \emph{Artificial Intelligence in Medicine} 80:11--28, 2017.
+A small, reproducible comparison of prose, blocklist, flat-list, and hierarchical scope policies on a constructed 311 benchmark, released with the question set and ontology. It will show whether inheritance helps, how much is lost to automatic matching, and that a structured policy can be checked for conflicts before use. If a well-tuned prompt matches the ontology at this scale, that is still a useful result about when a formal specification is worth the effort.
 
-\bibitem{dallas311} City of Dallas. 311 Service Requests October 1, 2020 to Present [dataset]. Dallas OpenData, id d7e7-envw. Accessed Sep. 2026. \url{https://www.dallasopendata.com/Services/311-Service-Requests/d7e7-envw}
+\vspace{0.5em}
+\noindent{\small\emph{AI use disclosure:} AI tools were used to help draft and edit sections of this report, to check references, and to draft initial versions of the data-preparation and baseline scripts, all of which I reviewed, modified, and tested. The design, ontology, question set, and analysis are my own.}
 
-
-\end{thebibliography}
-
-\vspace{0.3em}
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
 
 \end{document}

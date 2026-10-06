@@ -1,0 +1,31 @@
+concept,permitted,description
+PotHole,True,Pot Hole - Routine; Pot Hole - Hazardous
+StreetRepair,True,Street Repair - Routine; Alley/Sidewalk/Street Repair - Hazardous
+AlleyRepair,True,Alley/Sidewalk/Street Repair - Hazardous; Alley Repair - Routine
+GuardrailRepair,True,Guardrail Repair - Routine; Guardrail Repair - Hazardous; Guardrail - New
+TrafficSignalFlashing,True,Traffic Signal - Flashing; Traffic Signal - Other Dispatch; Traffic Signal - Bulb Out/NonConflict Hd Trn VO; Traffic Signal - Timing; Traffic Signal - All Out; Traffic Signal - School Flasher Maintenance
+TrafficSignMaintenance,True,Traffic Sign - Maintenance (Other); Traffic Sign - New; Traffic Sign - Knockdown; Traffic Sign - Visibility Obstruction; Traffic Sign - Other Dispatch
+GraffitiTrafficSignal,True,Graffiti City Streets & Bridges; Graffiti Traffic Signal; Graffiti Traffic Sign
+TreeDownLowLimbs,True,Tree Down/Low Limbs; TREE DOWN
+StreetSpillageDebris,True,Street Spillage/Debris in Right of Way - Hazardous
+MedianMaintenance,True,Median/Right of Way Maintenance
+MissedGarbage,True,Sanitation Missed Garbage
+MissedRecycle,True,Sanitation Missed Recycle
+MissedBrushBulk,True,Sanitation Missed Brush/Bulk
+RollCartMaintenance,True,Sanitation Roll Cart Maintenance/Delivery; Sanitation Commercial Roll Cart Services
+DeadAnimalPickup,True,Dead Animal Pick Up
+IllegalDumping,True,Illegal Dumping Sign; Illegal Dumping Urgent; illegal dumping abatement
+StormDrainCleaning,True,Inlet/Storm Drain Cleaning; Storm Drainage/Flooding Complaint; Inlet/Storm Drain Stopped Up - Hazardous; Objects Dropped in Inlet - Hazardous
+CreekCulvertBlockage,True,Creek/Culvert Maintenance; Creek/Culvert Blockage
+WaterMainLeak,True,Water Main Leak/Break
+WaterQuality,True,Water Questions - 311
+AnimalLoose,True,Animal Loose
+AnimalLooseCat,True,Animal Community Cat Program; Animal Loose Cat
+AnimalAggressiveBehavior,True,Animal Aggressive Behavior
+AnimalLackOfCare,True,Animal Lack of Care; Animal Confined; Animal confined
+HighWeeds,True,Code Concern; code concern; Code Concern - CCS; Code concern
+Emergency,False,Life-threatening situation; fire; crime in progress; medical emergency; natural gas leak. Call 911.
+PrivatePropertyDispute,False,"Disagreement between private parties about property, fences, trees or boundaries; civil matter not handled by the city."
+LegalMatter,False,"Court cases, citations and tickets, lawsuits, landlord and tenant law; contact Municipal Court or an attorney."
+OtherJurisdiction,False,Location outside the Dallas city limits; contact that city or county.
+OtherAgency,False,"State or federal services such as driver licenses, vehicle registration, passports; contact Texas DPS or the relevant agency."

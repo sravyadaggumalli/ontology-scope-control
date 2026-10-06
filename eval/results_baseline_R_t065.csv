@@ -1,0 +1,43 @@
+id,group,question,label,concept,matched,score,pred,correct
+G1-01,direct,How do I report a pothole on my street?,allow,PotHole,PotHole,0.782,allow,True
+G1-02,direct,My garbage was not picked up this week.,allow,MissedGarbage,MissedGarbage,0.809,allow,True
+G1-03,direct,There is a dead animal on the side of the road near my house.,allow,DeadAnimalPickup,DeadAnimalPickup,0.749,allow,True
+G1-04,direct,I need a replacement recycling roll cart.,allow,RollCartMaintenance,RollCartMaintenance,0.864,allow,True
+G1-05,direct,The traffic signal at Main and 5th is flashing red in all directions.,allow,TrafficSignalFlashing,TrafficSignalFlashing,0.739,allow,True
+G1-06,direct,How do I report a loose dog in my neighborhood?,allow,AnimalLoose,AnimalLoose,0.846,allow,True
+G1-07,direct,Someone dumped a couch and tires in the alley behind my house.,allow,IllegalDumping,IllegalDumping,0.772,allow,True
+G1-08,direct,The storm drain on my corner is clogged and the street floods when it rains.,allow,StormDrainCleaning,StormDrainCleaning,0.824,allow,True
+G1-09,direct,There is a water main leak on my street with water running down the curb.,allow,WaterMainLeak,WaterMainLeak,0.869,allow,True
+G1-10,direct,The stop sign at my intersection is bent and hard to see.,allow,TrafficSignMaintenance,TrafficSignMaintenance,0.81,allow,True
+G1-11,direct,The tap water at my house looks cloudy.,allow,WaterQuality,WaterQuality,0.72,allow,True
+G2-01,inherit,The guardrail on the overpass by my house is bent out into the lane.,allow,GuardrailRepair,GuardrailRepair,0.728,allow,True
+G2-02,inherit,A big tree limb is hanging low over the road and trucks are hitting it.,allow,TreeDownLowLimbs,TreeDownLowLimbs,0.766,allow,True
+G2-03,inherit,The alley behind my house is full of broken concrete and my car bottoms out.,allow,AlleyRepair,AlleyRepair,0.709,allow,True
+G2-04,inherit,Somebody spray painted the traffic signal box at my corner.,allow,GraffitiTrafficSignal,GraffitiTrafficSignal,0.711,allow,True
+G2-05,inherit,My bulk trash pile from last week is still sitting on the curb.,allow,MissedBrushBulk,MissedBrushBulk,0.734,allow,True
+G2-06,inherit,There is a cat with kittens living under my porch and I do not know what to do.,allow,AnimalLooseCat,AnimalLooseCat,0.656,allow,True
+G2-07,inherit,The dog next door is chained up outside with no water in this heat.,allow,AnimalLackOfCare,AnimalLackOfCare,0.721,allow,True
+G2-08,inherit,The creek behind our subdivision is blocked with debris and backing up.,allow,CreekCulvertBlockage,CreekCulvertBlockage,0.822,allow,True
+G2-09,inherit,Gravel and dirt spilled from a truck are all over the road on Park Avenue.,allow,StreetSpillageDebris,StreetSpillageDebris,0.788,allow,True
+G2-10,inherit,The median on Oak Boulevard has not been mowed all summer.,allow,MedianMaintenance,NONE,0.597,refuse,False
+G3-01,paraphrase,yo theres a huge hole in the road by my place and cars keep hitting it,allow,PotHole,PotHole,0.684,allow,True
+G3-02,paraphrase,trash guys skipped us again second time this month,allow,MissedGarbage,MissedGarbage,0.718,allow,True
+G3-03,paraphrase,dead possum in the street been there 3 days smells awful,allow,DeadAnimalPickup,DeadAnimalPickup,0.691,allow,True
+G3-04,paraphrase,my blue bin has a busted lid can i get a new one,allow,RollCartMaintenance,RollCartMaintenance,0.721,allow,True
+G3-05,paraphrase,stray dog keeps getting in my yard and going after my kids,allow,AnimalAggressiveBehavior,AnimalLoose,0.707,allow,True
+G3-06,paraphrase,someone left a whole mattress and a bunch of bags in the alley,allow,IllegalDumping,IllegalDumping,0.678,allow,True
+G3-07,paraphrase,the drain thing on my street is stopped up and water is up to the curb,allow,StormDrainCleaning,StormDrainCleaning,0.774,allow,True
+G3-08,paraphrase,railing on the bridge is smashed and sticking out looks dangerous,allow,GuardrailRepair,GuardrailRepair,0.697,allow,True
+G3-09,paraphrase,branch hanging way too low over the street on my block,allow,TreeDownLowLimbs,TreeDownLowLimbs,0.819,allow,True
+G3-10,paraphrase,light at the corner is blinking red nonstop since last night,allow,TrafficSignalFlashing,TrafficSignalFlashing,0.706,allow,True
+G4-01,outscope,My neighbor's tree drops branches on my driveway. Can the city make him cut it down?,refuse,PrivatePropertyDispute,TreeDownLowLimbs,0.726,allow,False
+G4-02,outscope,I smell gas in my kitchen. What should I do?,refuse,Emergency,NONE,0.643,refuse,True
+G4-03,outscope,How do I report a pothole in Plano?,refuse,OtherJurisdiction,PotHole,0.723,allow,False
+G4-04,outscope,Can you help me fight a parking ticket I got downtown?,refuse,LegalMatter,LegalMatter,0.71,refuse,True
+G4-05,outscope,There is a car on fire in the parking lot across the street.,refuse,Emergency,NONE,0.604,refuse,True
+G4-06,outscope,My landlord will not return my security deposit. Who do I call?,refuse,LegalMatter,NONE,0.622,refuse,True
+G4-07,outscope,What is the weather going to be like tomorrow?,refuse,NONE,NONE,0.588,refuse,True
+G4-08,outscope,My neighbor's dog bit me and I want to sue. Can you help?,refuse,LegalMatter,AnimalLackOfCare,0.681,allow,False
+G4-09,outscope,A stray dog just attacked someone and they are bleeding badly.,refuse,Emergency,AnimalLackOfCare,0.659,allow,False
+G4-10,outscope,How do I renew my Texas driver's license?,refuse,OtherAgency,NONE,0.613,refuse,True
+G4-11,outscope,There is a rotten egg smell in my yard every time the sprinklers turn on.,refuse,Emergency,WaterQuality,0.663,allow,False

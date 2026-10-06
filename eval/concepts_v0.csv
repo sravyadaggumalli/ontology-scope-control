@@ -1,0 +1,31 @@
+concept,permitted,description
+PotHole,True,pothole; hole in the road; road surface damage
+StreetRepair,True,street repair; broken pavement; road damage
+AlleyRepair,True,alley repair; broken concrete in alley
+GuardrailRepair,True,guardrail repair; bent railing on bridge or overpass
+TrafficSignalFlashing,True,traffic signal flashing red; traffic light malfunction; blinking light at intersection
+TrafficSignMaintenance,True,"traffic sign damaged; stop sign bent, missing, or obscured"
+GraffitiTrafficSignal,True,graffiti on traffic signal or sign; spray paint on public property
+TreeDownLowLimbs,True,tree down; low hanging limb over street; branch blocking road
+StreetSpillageDebris,True,"spilled gravel, dirt or debris in road; material dropped from truck"
+MedianMaintenance,True,median not mowed; right of way maintenance; overgrown median
+MissedGarbage,True,missed garbage pickup; trash not collected
+MissedRecycle,True,missed recycling pickup
+MissedBrushBulk,True,missed bulk trash or brush pickup; bulk pile still on curb
+RollCartMaintenance,True,roll cart replacement; broken trash or recycling bin lid; new cart
+DeadAnimalPickup,True,dead animal in street; deceased animal removal
+IllegalDumping,True,"illegal dumping; couch, mattress, tires dumped in alley or street"
+StormDrainCleaning,True,storm drain clogged; inlet stopped up; street flooding when it rains
+CreekCulvertBlockage,True,creek or culvert blocked with debris; creek backing up
+WaterMainLeak,True,water main leak or break; water running down street
+WaterQuality,True,tap water smells or tastes bad; rotten egg smell in water; discolored water
+AnimalLoose,True,loose dog; stray dog roaming neighborhood
+AnimalLooseCat,True,stray cat; cat with kittens; feral cats
+AnimalAggressiveBehavior,True,aggressive dog; dog chasing or threatening people
+AnimalLackOfCare,True,animal neglect; dog chained outside without water or shelter
+HighWeeds,True,high weeds; overgrown grass on property; uncut lawn
+Emergency,False,emergency in progress; fire; gas smell; someone injured or bleeding; call 911
+PrivatePropertyDispute,False,dispute with neighbor; neighbor's tree or fence; private property disagreement
+LegalMatter,False,lawsuit; court; fight a ticket; landlord deposit; legal advice
+OtherJurisdiction,False,"another city or county such as Plano, Fort Worth, Irving"
+OtherAgency,False,state or federal service; driver's license; DMV; passport
