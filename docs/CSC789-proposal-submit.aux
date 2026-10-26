@@ -6,12 +6,12 @@
 \citation{nemo}
 \citation{ctat}
 \citation{enstom}
-\citation{kaos}
-\citation{rei}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {II}Background and Related Work}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Runtime policy enforcement for tool-using agents}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Staying on topic in dialogue}{1}{}\protected@file@percent }
+\citation{kaos}
+\citation{rei}
 \citation{agentspec}
 \citation{forge}
 \citation{abc}
@@ -36,8 +36,13 @@
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Evaluation Plan}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Baseline Results}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IX}Discussion of Baseline Results}{3}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Out-of-scope questions allowed and in-scope questions refused for each baseline run.}}{3}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Out-of-scope questions allowed and in-scope questions refused for each run, including the ontology with automatic matching (C) and with the gold concept (D). The flat list runs are those of Table~\ref {tab:baseline} and the prompt is the majority of three runs.}}{3}{}\protected@file@percent }
 \newlabel{fig:baseline}{{2}{3}{}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Inferred class hierarchy of \texttt  {scope\_v1.owl} in Prot\'eg\'e after running HermiT reasoner. Every concept is satisfiable.}}{4}{}\protected@file@percent }
+\newlabel{fig:protege}{{3}{4}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {X}Proposed Method: Implementation}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Startup check with five planted policy errors. Six problems are reported; PotHoleHazardous is caught through inheritance.}}{4}{}\protected@file@percent }
+\newlabel{fig:planted}{{4}{4}{}{figure.4}{}}
 \bibstyle{IEEEtran}
 \bibdata{refs}
 \bibcite{agentspec}{1}
@@ -51,10 +56,12 @@
 \bibcite{rei}{9}
 \bibcite{dallas311}{10}
 \bibcite{owlready}{11}
-\@writefile{toc}{\contentsline {section}{\numberline {X}Expected Contribution}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{4}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Related work comparison. P = peer-reviewed; pre = arXiv preprint. Rows 1--4: runtime policy enforcement for tool-using agents; 5--7: staying on topic in dialogue; 8: ontology-based agent policy before LLMs.}}{5}{}\protected@file@percent }
-\newlabel{tab:related}{{I}{5}{}{table.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Baseline error rates on the 42-question pilot set (31 in-scope, 11 out-of-scope). Concept accuracy is the share of in-scope questions matched to the correct concept, not just a permitted one.}}{6}{}\protected@file@percent }
-\newlabel{tab:baseline}{{II}{6}{}{table.2}{}}
-\gdef \@abspage@last{6}
+\@writefile{toc}{\contentsline {section}{\numberline {XI}Expected Contribution}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{5}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Related work comparison. P = peer-reviewed; pre = arXiv preprint. Rows 1--4: runtime policy enforcement for tool-using agents; 5--7: staying on topic in dialogue; 8: ontology-based agent policy before LLMs.}}{6}{}\protected@file@percent }
+\newlabel{tab:related}{{I}{6}{}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Baseline error rates on the 42-question pilot set (31 in-scope, 11 out-of-scope). Concept accuracy is the share of in-scope questions matched to the correct concept, not just a permitted one.}}{7}{}\protected@file@percent }
+\newlabel{tab:baseline}{{II}{7}{}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Ontology runs on the 42-question pilot set. Flat list row repeated from Table~\ref {tab:baseline} for comparison. Concept accuracy in parentheses counts a Hazardous subclass of the correct concept as correct.}}{7}{}\protected@file@percent }
+\newlabel{tab:ontology}{{III}{7}{}{table.3}{}}
+\gdef \@abspage@last{7}

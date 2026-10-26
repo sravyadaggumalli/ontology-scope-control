@@ -24,6 +24,12 @@ if a_files:
     print(f"prompt: {flipped} of {len(maj)} verdicts changed across {len(dfs)} runs")
     runs["A (majority)"] = maj
 
+# ontology runs: C (automatic matching) and D (gold concept)
+for arm in ("C", "D"):
+    f = f"eval/results_ontology_{arm}.csv"
+    if glob.glob(f):
+        runs[f"ontology {arm}"] = pd.read_csv(f)
+
 # error rates per run
 rows = []
 for name, df in runs.items():
@@ -40,7 +46,7 @@ print(res.round(1))
 # plot
 res.plot.bar(rot=15, figsize=(7, 4))
 plt.ylabel("error rate (%)")
-plt.title("Baseline error rates, 42-question pilot")
+plt.title("Error rates, 42-question pilot")
 plt.tight_layout()
 plt.savefig("docs/figures/baseline_results.png", dpi=150)
 print("wrote docs/figures/baseline_results.png")

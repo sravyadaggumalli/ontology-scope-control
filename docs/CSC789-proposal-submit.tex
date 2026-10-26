@@ -23,7 +23,7 @@ Madison, SD, USA}
 \maketitle
 
 \begin{abstract}
-LLM-based conversational agents are usually told what they may respond to through a free-text system prompt, most often a list of forbidden topics. Such prompts cannot be checked for contradictions, miss cases their author did not anticipate, and do not let a permission on a broad category carry down to the narrower cases inside it. This project tests whether an ontology in which permissions are attached to concepts and inherited through the hierarchy makes better allow/refuse decisions for a city 311 assistant than a prose prompt, a blocklist, or a flat topic list, on the same set of questions. A pilot evaluation of the two baselines on 42 questions shows them failing in opposite directions: the flat list refuses nothing in scope but lets near-miss questions through, while the prompt catches near misses but refuses hazardous-but-routine requests as emergencies.
+LLM-based conversational agents are usually told what they may respond to through a free-text system prompt, most often a list of forbidden topics. Such prompts cannot be checked for contradictions, miss cases their author did not anticipate, and do not let a permission on a broad category carry down to the narrower cases inside it. This project tests whether an ontology in which permissions are attached to concepts and inherited through the hierarchy makes better allow/refuse decisions for a city 311 assistant than a prose prompt, a blocklist, or a flat topic list, on the same set of questions. A pilot evaluation of the two baselines on 42 questions shows them failing in opposite directions: the flat list refuses nothing in scope but lets near-miss questions through, while the prompt catches near misses but refuses hazardous-but-routine requests as emergencies. The proposed ontology, generated from the city's request taxonomy, decides all 42 pilot questions correctly when given the right concept and matches the flat list when the concept is found automatically, so the remaining error is in matching questions to concepts, not in the ontology.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -98,7 +98,7 @@ I use the Dallas 311 Service Requests open data, October 2020 to present~\cite{d
 \label{fig:taxonomy}
 \end{figure}
 
-The pilot evaluation set has 42 hand-written questions in four groups: direct (11), inheritance-dependent (10), paraphrase (10), and out-of-scope (11), each labeled allow or refuse with its concept. The out-of-scope group is built from near misses that reuse 311 vocabulary. The full 160-question set with a second labeler is scheduled for Week 6.
+The pilot evaluation set has 42 hand-written questions in four groups: direct (11), inheritance-dependent (10), paraphrase (10), and out-of-scope (11), each labeled allow or refuse with its concept. The out-of-scope group is built from near misses that reuse 311 vocabulary. The full 160-question set with a second labeler is still to be completed.
 
 \section{Proposed AI Approach}
 
@@ -124,7 +124,7 @@ Each approach takes a question and returns \textbf{allow} or \textbf{refuse} wit
   \item \textbf{Comparison:} McNemar's test between approaches (all see the same questions), plus a table of which questions each approach got wrong.
   \item \textbf{Qualitative:} the inheritance path used for questions that depend on it; the reasoner catching a concept marked both permitted and denied before any question is run.
   \item \textbf{Expected result:} the ontology does best on inheritance-dependent questions, loses some on reworded questions to matching errors, and differs little on questions that name a service directly.
-  \item \textbf{Schedule:} taxonomy, questions, and ontology by Week 6; runs and analysis Weeks 7--9; report after that. API should cost under \$30; everything else runs on my computer.
+  \item \textbf{Schedule:} taxonomy, pilot questions, and ontology done; full question set and remaining runs Weeks 9--11; report after that. API should cost under \$30; everything else runs on my computer.
 \end{itemize}
 
 \section{Baseline Results}
@@ -152,7 +152,7 @@ Prompt, majority of 3 runs        & 1/11 & 6/31 & -- \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/baseline_results.png}
-\caption{Out-of-scope questions allowed and in-scope questions refused for each baseline run.}
+\caption{Out-of-scope questions allowed and in-scope questions refused for each run, including the ontology with automatic matching (C) and with the gold concept (D). The flat list runs are those of Table~\ref{tab:baseline} and the prompt is the majority of three runs.}
 \label{fig:baseline}
 \end{figure}
 
@@ -164,12 +164,55 @@ Prompt, majority of 3 runs        & 1/11 & 6/31 & -- \\
 
 \textbf{What should be improved.} I have piloted with 42 questions but the real experiment needs to be conducted with a larger dataset. The questions I aimed initially is 160 with a tuning/test split, questions written by someone who is unaware of the ontology, plus a second labeler on a sample. The threshold should be tuned on the tuning split only and then frozen. For the ontology, concept accuracy matters more than verdict accuracy, since inheritance starts from the matched concept; with taxonomy-only descriptions it is 61\%, so the ontology's labels need alternate names drawn from the Dallas data rather than from the test questions. The pilot also showed two design requirements: hazardous-but-routine concepts must sit under permitted parents, separate from a denied Emergency concept so that they inherit permission, and denied concepts such as OtherJurisdiction and LegalMatter must be matched explicitly so near misses are refused with a valid reason. Finally, the ontology should be reported alongside the oracle condition with the gold concept supplied, to separate matching error from policy error.
 
+\section{Proposed Method: Implementation}
+
+\textbf{Building the ontology.} The ontology is generated by a Python script so it can be rebuilt at any time. The script reads the cleaned Dallas taxonomy (270 request types with department and count) which is the same taxonomy-only concept list used by the flat baseline, and an overrides file for hand-written policy exceptions, and writes \texttt{scope\_v1.owl} file. The tree has one root with two disjoint branches. \texttt{CityServiceRequest} is tagged permit and holds one class per Dallas department (six in the pilot) and one leaf per concept, placed under the department where it belongs. \texttt{NotHandled} is tagged deny and holds Emergency, LegalMatter, PrivatePropertyDispute, OtherJurisdiction, and OtherAgency. The pilot ontology contains 46 classes (Fig.~\ref{fig:protege}). Permission is defined as an OWL annotation property attached only to the two branch roots (\texttt{permit} and \texttt{deny}); every other class has no tag of its own and inherits the permission of its nearest tagged ancestor. When the Dallas taxonomy includes a hazardous variant of a routine service (such as \emph{Pot Hole - Hazardous}), it is modeled as an untagged \texttt{Hazardous} subclass under that service so that it automatically inherits \texttt{permit}. Exceptions are listed in the overrides file, one is added for the pilot: \texttt{AnimalAttackNow} sits under the permitted animal services branch but carries an explicit \texttt{deny} tag, since an active attack is a 911 call and Dallas has no request type for it.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/ontology_v1_protege.png}
+\caption{Inferred class hierarchy of \texttt{scope\_v1.owl} in Prot\'eg\'e after running HermiT reasoner. Every concept is satisfiable.}
+\label{fig:protege}
+\end{figure}
+
+\textbf{Checking the policy at startup.} Annotations are ignored by OWL reasoners by design, so the check has two parts. When the file is loaded initially, HermiT is run once using \texttt{owlready2}; because the two branches are disjoint, any class that ends up under both is inferred equivalent to \texttt{owl:Nothing} and is reported back. A second pass in Python reads the annotations and reports any class that carries both permit and deny, or a tag that is neither. If either part part reports a problem, we stop the program and no question is answered. To verify the check works, an option flag (\texttt{plant}) plants five errors: a permitted concept placed under \texttt{NotHandled}, a denied concept placed under \texttt{CityServiceRequest}, a service placed under \texttt{LegalMatter}, a class with both tags, and a class tagged \emph{maybe}. The check, as intended, reports six problems (Fig.~\ref{fig:planted}); the extra one is the Hazardous child of the misplaced concept, which inherits both parents and is reported.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/startup_check_planted.png}
+\caption{Startup check with five planted policy errors. Six problems are reported; PotHoleHazardous is caught through inheritance.}
+\label{fig:planted}
+\end{figure}
+
+\textbf{Deciding a question.} At runtime the decision is made by a walk up the tree. Given a concept, the code looks at the concept and then its ancestors and returns the first permission found; a concept with no tagged ancestor is denied. The reasoner is not called per question but only at startup. Run D takes the gold concept from the question file, so it tests only the tree and its tags. Run C embeds every ontology class that has a description with the same sentence-embedding model and threshold as the flat baseline, takes the nearest class, and passes it to the same walk.
+
+\textbf{Pilot results.} Both runs were scored on the 42-question pilot set (Table~\ref{tab:ontology}, Fig.~\ref{fig:baseline}). Run D decides all 42 questions correctly and reaches the right concept for all 31 in-scope questions; the one question with no concept (weather) is unmatched and refused. This is expected for the oracle and confirms that the generated tree encodes the intended policy, including the inherited verdicts for the hazardous subclasses and the denied override.
+
+With automatic matching (run C) the ontology decides 34 of 42 correctly, about the same as the flat list. The errors are almost all matching errors. Six in-scope questions land on the Hazardous subclass of the right concept, which still inherits permit and is decided correctly; counting those, concept accuracy is 19/31, equal to the flat list. The out-of-scope questions that were allowed are the same ones the flat list allowed, because the word \emph{hazardous} in the generated descriptions attracts emergency wording such as a gas smell or a car on fire. The one question the hierarchy fixed is the dog attack with an injured person, refused through the \texttt{AnimalAttackNow} exception as mentioned earlier via overrides and the same one which the flat list allowed as a loose animal. The same exception also refuses two in-scope animal questions (a chained dog without water, a stray dog chasing children), so it still needs a more detailed description. The gap between run C and run D, eight questions, is entirely the cost of matching, which is what the remaining weeks address.
+
+\begin{table}[h]
+\centering
+\caption{Ontology runs on the 42-question pilot set. Flat list row repeated from Table~\ref{tab:baseline} for comparison. Concept accuracy in parentheses counts a Hazardous subclass of the correct concept as correct.}
+\label{tab:ontology}
+\begin{tabular}{lccc}
+\toprule
+Run & Out-of-scope allowed & In-scope refused & Concept acc. \\
+\midrule
+Flat, taxonomy descr., t=0.55 & 6/11 & 1/31 & 19/31 \\
+C: ontology, matched          & 5/11 & 3/31 & 13/31 (19/31) \\
+D: ontology, gold concept     & 0/11 & 0/31 & 31/31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{What remains.} Run B (prompt plus blocklist); the full 160-question set with a second labeler and a frozen tuning/test split; threshold and description changes made on the tuning split only; McNemar's test on the test split once all five runs exist.
+
 \section{Expected Contribution}
 
 A small, reproducible comparison of prose, blocklist, flat-list, and hierarchical scope policies on a constructed 311 benchmark, released with the question set and ontology. It will show whether inheritance helps, how much is lost to automatic matching, and that a structured policy can be checked for conflicts before use. If a well-tuned prompt matches the ontology at this scale, that is still a useful result about when a formal specification is worth the effort.
 
 \vspace{0.5em}
-\noindent{\small\emph{AI use disclosure:} AI tools were used to help draft and edit sections of this report, to check references, and to draft initial versions of the data-preparation and baseline scripts, all of which I reviewed, modified, and tested. The design, ontology, question set, and analysis are my own.}
+\noindent{\small\emph{AI use disclosure:} AI tools were used to help format and edit sections of this report, to check references, and to assist with the data-preparation and baseline scripts, all of which I reviewed, modified, and tested. The design, ontology, question set, and analysis are my own.}
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}

@@ -33,9 +33,8 @@ This should give us approx. 200 unique service names.
 
 ## Notes
 
-- "Code Concern - CCS" is a catch-all with about 27% of all requests. Its
-  subtypes are not in the data and can be taken from the Code Compliance
-  public pages.
+- "Code Concern - CCS" is a catch-all with about 27% of all requests. The
+  data does not break it down further, so it stays one concept.
 - Department is the only hierarchy in the data. The mid-level grouping of
   services into concepts will be authored.
 

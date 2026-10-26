@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/scope311"
+         xmlns="http://example.org/scope311#">
+
+<owl:Ontology rdf:about="http://example.org/scope311"/>
+
+<owl:AnnotationProperty rdf:about="#permission"/>
+
+<owl:AnnotationProperty rdf:about="#description"/>
+
+<owl:AnnotationProperty rdf:about="#source"/>
+
+<owl:Class rdf:about="#ScopeConcept">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CityServiceRequest">
+  <rdfs:subClassOf rdf:resource="#ScopeConcept"/>
+  <owl:disjointWith rdf:resource="#NotHandled"/>
+  <permission rdf:datatype="http://www.w3.org/2001/XMLSchema#string">permit</permission>
+</owl:Class>
+
+<owl:Class rdf:about="#NotHandled">
+  <rdfs:subClassOf rdf:resource="#ScopeConcept"/>
+  <permission rdf:datatype="http://www.w3.org/2001/XMLSchema#string">deny</permission>
+</owl:Class>
+
+<owl:Class rdf:about="#TransportationAndPublicWorks">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Transportation and Public Works</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#PotHole">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pot Hole - Routine</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#PotHoleHazardous">
+  <rdfs:subClassOf rdf:resource="#PotHole"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pot Hole - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StreetRepair">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Street Repair - Routine</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StreetRepairHazardous">
+  <rdfs:subClassOf rdf:resource="#StreetRepair"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alley/Sidewalk/Street Repair - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AlleyRepair">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alley Repair - Routine</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AlleyRepairHazardous">
+  <rdfs:subClassOf rdf:resource="#AlleyRepair"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alley/Sidewalk/Street Repair - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#GuardrailRepair">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guardrail Repair - Routine; Guardrail - New</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#GuardrailRepairHazardous">
+  <rdfs:subClassOf rdf:resource="#GuardrailRepair"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guardrail Repair - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#TrafficSignalFlashing">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Traffic Signal - Flashing; Traffic Signal - Other Dispatch; Traffic Signal - Bulb Out/NonConflict Hd Trn VO; Traffic Signal - Timing; Traffic Signal - All Out; Traffic Signal - School Flasher Maintenance</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#TrafficSignMaintenance">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Traffic Sign - Maintenance (Other); Traffic Sign - New; Traffic Sign - Knockdown; Traffic Sign - Visibility Obstruction; Traffic Sign - Other Dispatch</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#GraffitiTrafficSignal">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Graffiti City Streets &amp; Bridges; Graffiti Traffic Signal; Graffiti Traffic Sign</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#TreeDownLowLimbs">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tree Down/Low Limbs; TREE DOWN</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StreetSpillageDebris">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Street Spillage/Debris in Right of Way - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StreetSpillageDebrisHazardous">
+  <rdfs:subClassOf rdf:resource="#StreetSpillageDebris"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Street Spillage/Debris in Right of Way - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#MedianMaintenance">
+  <rdfs:subClassOf rdf:resource="#TransportationAndPublicWorks"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Median/Right of Way Maintenance</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#Sanitation">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sanitation</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#MissedGarbage">
+  <rdfs:subClassOf rdf:resource="#Sanitation"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sanitation Missed Garbage</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#MissedRecycle">
+  <rdfs:subClassOf rdf:resource="#Sanitation"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sanitation Missed Recycle</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#MissedBrushBulk">
+  <rdfs:subClassOf rdf:resource="#Sanitation"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sanitation Missed Brush/Bulk</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#RollCartMaintenance">
+  <rdfs:subClassOf rdf:resource="#Sanitation"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sanitation Roll Cart Maintenance/Delivery; Sanitation Commercial Roll Cart Services</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#DeadAnimalPickup">
+  <rdfs:subClassOf rdf:resource="#Sanitation"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dead Animal Pick Up</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#CodeCompliance">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Code Compliance</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#IllegalDumping">
+  <rdfs:subClassOf rdf:resource="#CodeCompliance"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Illegal Dumping Sign; Illegal Dumping Urgent; illegal dumping abatement</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterUtilities">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Water Utilities</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StormDrainCleaning">
+  <rdfs:subClassOf rdf:resource="#WaterUtilities"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inlet/Storm Drain Cleaning; Storm Drainage/Flooding Complaint</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#StormDrainCleaningHazardous">
+  <rdfs:subClassOf rdf:resource="#StormDrainCleaning"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inlet/Storm Drain Stopped Up - Hazardous; Objects Dropped in Inlet - Hazardous</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#CreekCulvertBlockage">
+  <rdfs:subClassOf rdf:resource="#WaterUtilities"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creek/Culvert Maintenance; Creek/Culvert Blockage</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterMainLeak">
+  <rdfs:subClassOf rdf:resource="#WaterUtilities"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Water Main Leak/Break</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#311CustomerServiceCenter">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">311 Customer Service Center</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterQuality">
+  <rdfs:subClassOf rdf:resource="#311CustomerServiceCenter"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Water Questions - 311</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#DallasAnimalServices">
+  <rdfs:subClassOf rdf:resource="#CityServiceRequest"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dallas Animal Services</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AnimalLoose">
+  <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal Loose</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AnimalLooseCat">
+  <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal Community Cat Program; Animal Loose Cat</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AnimalAggressiveBehavior">
+  <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal Aggressive Behavior</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AnimalLackOfCare">
+  <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal Lack of Care; Animal Confined; Animal confined</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#HighWeeds">
+  <rdfs:subClassOf rdf:resource="#CodeCompliance"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Code Concern; code concern; Code Concern - CCS; Code concern</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dallas</source>
+</owl:Class>
+
+<owl:Class rdf:about="#Emergency">
+  <rdfs:subClassOf rdf:resource="#NotHandled"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Life-threatening situation; fire; crime in progress; medical emergency; natural gas leak. Call 911.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+</owl:Class>
+
+<owl:Class rdf:about="#PrivatePropertyDispute">
+  <rdfs:subClassOf rdf:resource="#NotHandled"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Disagreement between private parties about property, fences, trees or boundaries; civil matter not handled by the city.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+</owl:Class>
+
+<owl:Class rdf:about="#LegalMatter">
+  <rdfs:subClassOf rdf:resource="#NotHandled"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Court cases, citations and tickets, lawsuits, landlord and tenant law; contact Municipal Court or an attorney.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+</owl:Class>
+
+<owl:Class rdf:about="#OtherJurisdiction">
+  <rdfs:subClassOf rdf:resource="#NotHandled"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Location outside the Dallas city limits; contact that city or county.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+</owl:Class>
+
+<owl:Class rdf:about="#OtherAgency">
+  <rdfs:subClassOf rdf:resource="#NotHandled"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">State or federal services such as driver licenses, vehicle registration, passports; contact Texas DPS or the relevant agency.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+</owl:Class>
+
+<owl:Class rdf:about="#AnimalAttackNow">
+  <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal attack happening right now with a person injured; call 911.</description>
+  <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
+  <permission rdf:datatype="http://www.w3.org/2001/XMLSchema#string">deny</permission>
+</owl:Class>
+
+
+</rdf:RDF>

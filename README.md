@@ -52,6 +52,33 @@ a small hosted LLM for the prompt baselines.
 
     docs/       proposal, progress reports
     data/       311 Dallas OpenData and cleanup notes
-    ontology/   OWL files
-    src/        matching, permission lookup, baselines
+    ontology/   scope_v1.owl (generated), overrides.csv (hand-written exceptions)
+    src/        matching, permission lookup, baselines, ontology build and runs
     eval/       question set, labels, results
+
+## Running
+
+    pip install -r requirements.txt     # owlready2 needs Java for the reasoner
+    python src/clean_taxonomy.py        # data/taxonomy_clean.csv
+    python src/build_ontology.py        # ontology/scope_v1.owl
+    python src/scope_ontology.py        # startup check and tree print
+    python src/scope_ontology.py --plant   # same, with five planted conflicts
+    python src/baseline_flat.py         # arm R
+    python src/baseline_prompt.py       # arm A (needs an API key)
+    python src/run_ontology.py --arm D  # ontology, gold concept
+    python src/run_ontology.py --arm C  # ontology, embedding match
+    python src/plot_results.py          # docs/figures/baseline_results.png
+
+## Ontology (arm C)
+
+`build_ontology.py` generates the OWL file from the cleaned Dallas taxonomy and
+the concept list. The tree is ScopeConcept, then two disjoint branches:
+CityServiceRequest (tagged permit) with one class per Dallas department and one
+leaf per concept, and NotHandled (tagged deny) with the refused concepts. A
+concept gets a Hazardous subclass when Dallas has a hazardous variant of the
+request type. Permission is an annotation on the two branch roots only; every
+other class inherits it, except the exceptions in `ontology/overrides.csv`.
+
+`scope_ontology.py` loads the file, runs HermiT once at startup to check the
+hierarchy, checks that no class carries two tags, and answers
+permit/deny for a concept by walking up from the concept until a tag is found.

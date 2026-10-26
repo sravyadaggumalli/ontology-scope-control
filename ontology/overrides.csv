@@ -1,0 +1,2 @@
+concept,parent,permission,description
+AnimalAttackNow,DallasAnimalServices,deny,Animal attack happening right now with a person injured; call 911.
