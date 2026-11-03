@@ -24,7 +24,7 @@ from tabulate import tabulate
 
 
 class ScopeOntology:
-    def __init__(self, path="ontology/scope_v1.owl"):
+    def __init__(self, path="ontology/scope_v2.owl"):
         # Load ontology from OWL file
         # Set the permission property and the root class as attributes.
         self.onto = get_ontology("file://" + path).load()
@@ -121,7 +121,7 @@ def plant_conflicts(so):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("path", nargs="?", default="ontology/scope_v1.owl")
+    ap.add_argument("path", nargs="?", default="ontology/scope_v2.owl")
     ap.add_argument("--plant", action="store_true", help="plant five conflicts before checking")
     a = ap.parse_args()
     so = ScopeOntology(a.path)

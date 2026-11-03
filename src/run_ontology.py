@@ -31,7 +31,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("questions", nargs="?", default="eval/questions_v0.csv")
     ap.add_argument("--arm", choices=["C", "D"], required=True)
-    ap.add_argument("--ontology", default="ontology/scope_v1.owl")
+    ap.add_argument("--ontology", default="ontology/scope_v2.owl")
     ap.add_argument("--model", default="BAAI/bge-small-en-v1.5")
     ap.add_argument("--threshold", type=float, default=0.55)
     ap.add_argument("--out", default=None)

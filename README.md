@@ -52,7 +52,7 @@ a small hosted LLM for the prompt baselines.
 
     docs/       proposal, progress reports
     data/       311 Dallas OpenData and cleanup notes
-    ontology/   scope_v1.owl (generated), overrides.csv (hand-written exceptions)
+    ontology/   scope_v1.owl (pilot), scope_v2.owl (current), both generated; overrides.csv (hand-written exceptions)
     src/        matching, permission lookup, baselines, ontology build and runs
     eval/       question set, labels, results
 
@@ -60,7 +60,7 @@ a small hosted LLM for the prompt baselines.
 
     pip install -r requirements.txt     # owlready2 needs Java for the reasoner
     python src/clean_taxonomy.py        # data/taxonomy_clean.csv
-    python src/build_ontology.py        # ontology/scope_v1.owl
+    python src/build_ontology.py        # ontology/scope_v2.owl from eval/concepts_v2.csv
     python src/scope_ontology.py        # startup check and tree print
     python src/scope_ontology.py --plant   # same, with five planted conflicts
     python src/baseline_flat.py         # arm R
@@ -72,7 +72,11 @@ a small hosted LLM for the prompt baselines.
 ## Ontology (arm C)
 
 `build_ontology.py` generates the OWL file from the cleaned Dallas taxonomy and
-the concept list. The tree is ScopeConcept, then two disjoint branches:
+the concept list. `concepts_v1.csv` is the 30-concept pilot list; `concepts_v2.csv`
+adds nine high-volume services not in the pilot(parking, line locate,
+encampments, animal nuisance and bites, noise, parks, construction, street
+lighting), improves coverage from 68% to 86% of all requests (73 of 270 services). The pilot
+results in eval/ were produced with v1; the full evaluation uses v2. The tree is ScopeConcept, then two disjoint branches:
 CityServiceRequest (tagged permit) with one class per Dallas department and one
 leaf per concept, and NotHandled (tagged deny) with the refused concepts. A
 concept gets a Hazardous subclass when Dallas has a hazardous variant of the

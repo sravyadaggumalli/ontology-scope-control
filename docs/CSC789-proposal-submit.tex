@@ -205,7 +205,16 @@ D: ontology, gold concept     & 0/11 & 0/31 & 31/31 \\
 \end{tabular}
 \end{table}
 
-\textbf{What remains.} Run B (prompt plus blocklist); the full 160-question set with a second labeler and a frozen tuning/test split; threshold and description changes made on the tuning split only; McNemar's test on the test split once all five runs exist.
+\textbf{Week 9 additions.} Revisiting the Dallas volume data showed that the original 30 pilot concepts covered only 68\% of requests and left out several of the most common services: parking violations (the third most filed request type), utility line locate, homeless encampments, animal nuisance, animal bites, noise, parks, construction complaints and street lighting. These nine were added as concepts, with descriptions taken from the service names as before, and the ontology was regenerated: 58 classes under nine department classes, covering 73 of 270 services and 86\% of requests. The startup check and run D give the same results as with the pilot ontology. Baseline B, the prose prompt with an explicit twelve-item blocklist, was implemented with the same model, output format and scoring as baseline A; on the pilot it allows 0/11 out-of-scope questions and refuses 3/31 in-scope ones, majority of three runs (Fig.~\ref{fig:runB}). The blocklist removed the one leak the prose prompt had, the Plano pothole, because it names the neighboring cities explicitly, but it left the hazard refusals: the three in-scope questions it refuses are the bent guardrail, the limb hitting trucks, and the pothole cars keep hitting, and in each case the model cites the emergency item of the list. The blocklist names the same cities, agencies and dispute types the pilot out-of-scope questions use, since both were written from the 311 documentation, so the full question set, with questions written by someone who has not seen the blocklis, gives the real comparison. The question set is being increased to 160 using the volume ranking; the 42 pilot questions are assigned to the tuning split for now since they have already shaped the initial design.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/run_B.png}
+\caption{Baseline B (prose prompt with blocklist) on the pilot set, first run of three runs. The three in-scope refusals are the hazardous-but-routine cases which the prose prompt also refused.}
+\label{fig:runB}
+\end{figure}
+
+\textbf{What remains.} The full 160-question set with a second labeler and a frozen tuning/test split; threshold and description changes made on the tuning split only; all five runs on the full set; McNemar's test on the test split.
 
 \section{Expected Contribution}
 

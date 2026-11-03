@@ -10,17 +10,17 @@ and compared against every concept description. Above the threshold -> allow
 (if the concept is permitted) or refuse (if denied); below -> refuse.
 
 Usage:
-    python src/baseline_flat.py eval/questions_v0.csv [--threshold 0.55] [--concepts eval/concepts_v1.csv]
+    python src/baseline_flat.py eval/questions_v0.csv [--threshold 0.55] [--concepts eval/concepts_v2.csv]
 Output:
     eval/results_baseline_R.csv and a per-group metrics table on stdout
 """
 import argparse, sys
 import numpy as np, pandas as pd
-from sentence_transformers import SentenceTransformer
 
 # Concept list is loaded from a CSV (concept, permitted, description).
 #   eval/concepts_v0.csv  pilot list, descriptions written by hand
 #   eval/concepts_v1.csv  descriptions taken from Dallas service names only
+#   eval/concepts_v2.csv  v1 plus nine high-volume services not in the pilot
 
 def metrics(df):
     rows = []
@@ -42,11 +42,12 @@ if __name__ == "__main__":
     ap.add_argument("questions", nargs="?", default="eval/questions_v0.csv")
     ap.add_argument("--model", default="BAAI/bge-small-en-v1.5")
     ap.add_argument("--threshold", type=float, default=0.55)
-    ap.add_argument("--concepts", default="eval/concepts_v0.csv")
+    ap.add_argument("--concepts", default="eval/concepts_v2.csv")
     ap.add_argument("--out", default="eval/results_baseline_R.csv")
     a = ap.parse_args()
 
     concepts = pd.read_csv(a.concepts)
+    from sentence_transformers import SentenceTransformer
     m = SentenceTransformer(a.model)
     labels = concepts.concept.tolist()
     permitted = dict(zip(concepts.concept, concepts.permitted.astype(bool)))

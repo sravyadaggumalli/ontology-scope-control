@@ -13,13 +13,15 @@ Permission is an annotation property on classes. Only the two top-level classes
 carry a tag; everything else inherits it, except the overrides listed in
 ontology/overrides.csv (concept, parent, permission, description).
 
-Inputs:  data/taxonomy_clean.csv, eval/concepts_v1.csv, ontology/overrides.csv
-Output:  ontology/scope_v1.owl
+Inputs:  data/taxonomy_clean.csv, the concept list, ontology/overrides.csv
+Output:  the OWL file
 
 Usage:
-    python src/build_ontology.py
+    python src/build_ontology.py                                   # v2 (default)
+    python src/build_ontology.py --concepts eval/concepts_v1.csv --out ontology/scope_v1.owl
+v1 is the 30-concept pilot list; v2 adds nine high-volume services not in the pilot(parking, line locate, encampments, noise, parks, bites, ...).
 """
-import re, types
+import argparse, re, types
 import pandas as pd
 from owlready2 import get_ontology, Thing, AnnotationProperty, AllDisjoint
 
@@ -29,8 +31,12 @@ def camel(s):
     return re.sub(r"[^A-Za-z0-9]+", " ", s).title().replace(" ", "")
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--concepts", default="eval/concepts_v2.csv")
+    ap.add_argument("--out", default="ontology/scope_v2.owl")
+    a = ap.parse_args()
     tax = pd.read_csv("data/taxonomy_clean.csv")
-    concepts = pd.read_csv("eval/concepts_v1.csv")
+    concepts = pd.read_csv(a.concepts)
     overrides = pd.read_csv("ontology/overrides.csv")
 
     # department and request count per Dallas service name
@@ -93,9 +99,9 @@ def main():
                 cls.permission = [r.permission]
             classes[r.concept] = cls
 
-    onto.save(file="ontology/scope_v1.owl", format="rdfxml")
+    onto.save(file=a.out, format="rdfxml")
     n = len(list(onto.classes()))
-    print(f"wrote ontology/scope_v1.owl: {n} classes, {len(departments)} departments, "
+    print(f"wrote {a.out}: {n} classes, {len(departments)} departments, "
           f"{sum(1 for c in classes.values() if c.name.endswith('Hazardous'))} hazardous leaves, "
           f"{len(overrides)} overrides")
 
