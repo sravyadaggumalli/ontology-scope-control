@@ -71,4 +71,17 @@ L.~Kagal, T.~Finin, and A.~Joshi, ``A policy language for a pervasive computing 
 J.-B. Lamy, ``Owlready: Ontology-oriented programming in python with automatic classification and high level constructs for biomedical ontologies,'' \emph{Artificial Intelligence in Medicine}, vol.~80, pp. 11--28, 2017. [Online]. Available: \url{https://www.sciencedirect.com/science/article/pii/S0933365717300271}
 \BIBentrySTDinterwordspacing
 
+\bibitem{baracaldo2026}
+\BIBentryALTinterwordspacing
+N.~Baracaldo, ``From alignment to access control: A framework for genai policy enforcement,'' 2026. [Online]. Available: \url{https://arxiv.org/abs/2609.26682}
+\BIBentrySTDinterwordspacing
+
+\bibitem{safepyramid2026}
+\BIBentryALTinterwordspacing
+J.~Zhang, H.~He, S.~Zhang, S.~Wang, X.~Xu, Y.~Sun, M.~Shen, and F.~Liu, ``Safepyramid: A hierarchical benchmark for in-context policy guardrailing,'' 2026. [Online]. Available: \url{https://arxiv.org/abs/2606.29887}
+\BIBentrySTDinterwordspacing
+
+\bibitem{agenticrei2026}
+A.~Joshi, T.~Finin, K.~Joshi, and L.~Kagal, ``Deontic policies for runtime governance of agentic ai systems,'' in \emph{2026 IEEE International Conference on Web Services (ICWS)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, July 2026, pp. 1255--1264.
+
 \end{thebibliography}
