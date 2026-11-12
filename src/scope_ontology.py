@@ -18,7 +18,7 @@ Sources. The owlready2 docs:
     https://owlready2.readthedocs.io/en/latest/reasoning.html     sync_reasoner, inconsistency
     https://owlready2.readthedocs.io/en/latest/annotations.html   annotation property access
 """
-import argparse
+import argparse, re
 from owlready2 import get_ontology, sync_reasoner, Nothing, OwlReadyInconsistentOntologyError
 from tabulate import tabulate
 
@@ -84,6 +84,27 @@ class ScopeOntology:
         for c in self.onto.classes():
             if c.description and c.name not in ("CityServiceRequest", "NotHandled", "ScopeConcept"):
                 out.append((c.name, c.description[0]))
+        return out
+
+    def candidates(self, level="concepts", clean=True):
+        """Classes offered to the matcher.
+        level="all"       every class with a description (departments, concepts,
+                          Hazardous subclasses), as in the pilot run
+        level="concepts"  concepts only: no department classes (direct children
+                          of CityServiceRequest) and no Hazardous subclasses.
+                          The tree still has them for the permission walk.
+        clean=True        drop the Dallas suffixes " - Routine" / " - Hazardous"
+                          from descriptions so they do not pull emergency wording.
+        """
+        depts = {c.name for c in self.onto.CityServiceRequest.subclasses()}
+        out = []
+        for name, desc in self.leaf_concepts():
+            if level == "concepts" and (name in depts or name.endswith("Hazardous")):
+                continue
+            if clean:
+                desc = re.sub(r"\s*-\s*(Routine|Hazardous)\b", "", desc)
+                desc = "; ".join(dict.fromkeys(x.strip() for x in desc.split(";")))
+            out.append((name, desc))
         return out
 
     def tree(self):

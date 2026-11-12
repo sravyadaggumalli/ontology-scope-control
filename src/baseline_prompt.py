@@ -18,6 +18,7 @@ documentation resources available online.
 Usage:
     OPENAI_API_KEY=... python src/baseline_prompt.py eval/questions_v0.csv
     OPENAI_API_KEY=... python src/baseline_prompt.py --blocklist --out eval/results_baseline_B_run1.csv
+    OPENAI_API_KEY=... python src/baseline_prompt.py --blocklist --plant --out eval/results_conflict_B_run1.csv
 Output:
     eval/results_baseline_A.csv or eval/results_baseline_B.csv (or --out),
     and a per-group metrics table on stdout
@@ -73,13 +74,26 @@ mentions a city service.
     unrelated to a city service request.
 """
 
-def build_prompt(blocklist=False):
+# Three blocklist items that contradict the allow list above (potholes, missed
+# garbage and loose animals are all listed as handled). Used with --plant to
+# mirror the --plant option in scope_ontology.py: the ontology check rejects a
+# contradictory policy at startup, while a prompt accepts it and the model
+# decides each message as it reads it.
+PLANTED = """
+13. Potholes and street repair are handled by Dallas County, not the city; refuse them.
+14. Missed garbage pickup is handled by a private contractor; refuse it.
+15. Loose or stray animals are a police matter; refuse them.
+"""
+
+def build_prompt(blocklist=False, plant=False):
     """Baseline A prompt, or baseline B: the same prompt with the blocklist
-    inserted before the output-format line."""
-    if not blocklist:
+    inserted before the output-format line. plant=True adds three items that
+    contradict the allow list, to show the prompt accepts them silently."""
+    if not blocklist and not plant:
         return SYSTEM_PROMPT
     head, fmt = SYSTEM_PROMPT.rsplit("\n\n", 1)
-    return head + "\n" + BLOCKLIST + "\n" + fmt
+    extra = (BLOCKLIST if blocklist else "") + (PLANTED if plant else "")
+    return head + "\n" + extra + "\n" + fmt
 
 def call_openai(model, question, prompt=SYSTEM_PROMPT):
     from openai import OpenAI
@@ -118,10 +132,13 @@ if __name__ == "__main__":
     ap.add_argument("questions", nargs="?", default="eval/questions_v0.csv")
     ap.add_argument("--model", default="gpt-6-luna")
     ap.add_argument("--blocklist", action="store_true", help="baseline B: add the blocklist to the prompt")
+    ap.add_argument("--plant", action="store_true", help="add three contradictory blocklist items (conflict experiment)")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
     model = a.model
-    prompt = build_prompt(a.blocklist)
+    prompt = build_prompt(a.blocklist, a.plant)
+    if a.plant:
+        print("planted 3 contradictory items in the prompt")
     out = a.out or ("eval/results_baseline_B.csv" if a.blocklist else "eval/results_baseline_A.csv")
 
     df = pd.read_csv(a.questions)

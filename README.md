@@ -34,14 +34,14 @@ model is a fictional city, not Dallas's actual policy.
 
 ## Evaluation set
 
-160 questions in four groups of 40 (direct in-scope, inheritance-dependent
-in-scope, paraphrased in-scope, out-of-scope), with a subset written
-independently by someone with no knowledge of the ontology, and deliberately
-hard out-of-scope cases (near-misses and ambiguous questions). Each question is
-labeled allow/refuse plus its concept; a second person labels 40 independently.
-10 per group are held out for tuning, 30 per group form the fixed test set.
-
-If time permits a reduced version will be repeated on a second domain to check generality.
+`eval/questions_v0.csv` is the original 42-question pilot and used for every design decision so far, therefore it is the tuning split. `eval/questions_v1.csv`
+is the full set of 196 questions: columns id, group, question, label, concept, source
+(author or independent), split (tune or test). 132 were drafted as candidates from the
+Dallas service list ranked by request volume, so every permitted concept is covered,
+then reviewed and labeled by the author; 22 were written independently by a family
+member without seeing the concept list. The 154 non-pilot questions are the test split,
+assigned once by `src/split.py` with seed 20261111 and committed before any test run.
+Nothing is tuned on the test split. A second labeler on a sample is pending.
 
 ## Main tools
 
@@ -63,11 +63,20 @@ a small hosted LLM for the prompt baselines.
     python src/build_ontology.py        # ontology/scope_v2.owl from eval/concepts_v2.csv
     python src/scope_ontology.py        # startup check and tree print
     python src/scope_ontology.py --plant   # same, with five planted conflicts
-    python src/baseline_flat.py         # arm R
-    python src/baseline_prompt.py       # arm A (needs an API key)
-    python src/run_ontology.py --arm D  # ontology, gold concept
-    python src/run_ontology.py --arm C  # ontology, embedding match
-    python src/plot_results.py          # docs/figures/baseline_results.png
+    python src/check_questions.py       # sanity checks on eval/questions_v1.csv
+    python src/split.py                 # assign tune/test once, fixed seed (already done)
+
+    # all five approaches on the full set (API key needed for A, B and the LLM matcher)
+    for i in 1 2 3; do python src/baseline_prompt.py eval/questions_v1.csv --out eval/results_baseline_A_run$i.csv; done
+    for i in 1 2 3; do python src/baseline_prompt.py eval/questions_v1.csv --blocklist --out eval/results_baseline_B_run$i.csv; done
+    python src/baseline_flat.py eval/questions_v1.csv --out eval/results_baseline_R.csv
+    python src/run_ontology.py --arm C eval/questions_v1.csv
+    python src/run_ontology.py --arm C eval/questions_v1.csv --matcher llm --out eval/results_ontology_C_llm_run1.csv
+    python src/run_ontology.py --arm D eval/questions_v1.csv
+
+    python src/compare.py --split test --ref C-llm eval/results_*.csv   # table, McNemar, docs/figures/results_test.png
+    python src/plot_results.py          # pilot figure (docs/figures/baseline_results.png)
+    python src/baseline_prompt.py eval/questions_v0.csv --blocklist --plant   # conflict experiment for the prompt (planned)
 
 ## Ontology (arm C)
 

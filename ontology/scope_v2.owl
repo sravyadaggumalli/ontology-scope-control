@@ -355,7 +355,7 @@
 
 <owl:Class rdf:about="#AnimalAttackNow">
   <rdfs:subClassOf rdf:resource="#DallasAnimalServices"/>
-  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal attack happening right now with a person injured; call 911.</description>
+  <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal attack in progress right now with a person being bitten or seriously injured; call 911. Not for bites that already happened or for neglect.</description>
   <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authored</source>
   <permission rdf:datatype="http://www.w3.org/2001/XMLSchema#string">deny</permission>
 </owl:Class>

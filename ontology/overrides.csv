@@ -1,2 +1,2 @@
 concept,parent,permission,description
-AnimalAttackNow,DallasAnimalServices,deny,Animal attack happening right now with a person injured; call 911.
+AnimalAttackNow,DallasAnimalServices,deny,Animal attack in progress right now with a person being bitten or seriously injured; call 911. Not for bites that already happened or for neglect.
