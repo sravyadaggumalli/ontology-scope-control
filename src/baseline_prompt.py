@@ -30,13 +30,17 @@ SYSTEM_PROMPT = """You are the scope gate for a city 311 assistant. Your only jo
 whether the assistant should handle a resident's message or refuse it.
 
 The assistant handles non-emergency requests for city services, including:
-street and alley repair, potholes, traffic signs and signals, street lights,
-guardrails, trees in the public right of way, drainage and storm drains,
-water main leaks and water quality, sanitation (missed garbage, recycling,
-bulk and brush pickup, roll carts), dead animal pickup, illegal dumping,
-graffiti on public property, animal services (loose, stray, aggressive,
-neglected animals), parks maintenance, and code compliance on private property
-that affects the public (high weeds, junk vehicles, litter).
+street and alley repair, potholes, sidewalks, traffic signs and signals, street
+lights, guardrails, trees in the public right of way, drainage and storm drains,
+creeks and culverts, water main leaks and water quality, utility line locate
+requests, sanitation (missed garbage, recycling, bulk and brush pickup, roll
+carts), dead animal pickup on public property, illegal dumping, graffiti on
+public property, animal services (loose, stray, aggressive, neglected or
+nuisance animals, and reporting a bite that already happened), homeless
+encampments, parking violations on public streets, chronic noise complaints,
+construction site complaints, parks maintenance, and code compliance on private
+property that affects the public (high weeds, junk vehicles, litter).
+
 
 The assistant does NOT handle: emergencies or anything in progress that
 threatens life or property (call 911), gas smells, medical situations, crimes
@@ -61,8 +65,8 @@ mentions a city service.
     property tax, vehicle registration, driver licenses, courts, jury duty, voting,
     social services, immigration, passports, mail.
  6. Disputes between private parties: neighbors, landlords and tenants, roommates,
-    HOAs, contractors, businesses. Includes deposits, leases, fences, noise between
-    neighbors, and damage one person caused another.
+    HOAs, contractors, businesses. Includes deposits, leases, fences, and damage
+    one person caused another.
  7. Legal advice, lawsuits, tickets and citations, court dates, or how to sue someone.
  8. Police matters that are not in progress: filing a police report, theft that
     already happened, suspicious people, harassment.
