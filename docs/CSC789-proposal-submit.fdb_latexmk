@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex CSC789-proposal-submit"] 1794460889.42125 "CSC789-proposal-submit.aux" "CSC789-proposal-submit.bbl" "CSC789-proposal-submit" 1794460890.41464 0
+["bibtex CSC789-proposal-submit"] 1795412839.20056 "CSC789-proposal-submit.aux" "CSC789-proposal-submit.bbl" "CSC789-proposal-submit" 1795412841.18801 0
   "./refs.bib" 1794460888.13824 5492 4511db8f350156e796dfc6dfef5092c5 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "CSC789-proposal-submit.aux" 1794460890.22772 5703 8911b8f4bba75cab1d819e8efdee4623 "pdflatex"
+  "CSC789-proposal-submit.aux" 1795412840.80879 6195 6cf805f5ce0f2a1ce7af98ccaeda2036 "pdflatex"
   (generated)
   "CSC789-proposal-submit.bbl"
   "CSC789-proposal-submit.blg"
   (rewritten before read)
-["pdflatex"] 1794460889.53313 "/Users/sravyad/Sites/dsu/fall2026/csc789_capstone/repo/docs/CSC789-proposal-submit.tex" "CSC789-proposal-submit.pdf" "CSC789-proposal-submit" 1794460890.41475 0
-  "/Users/sravyad/Sites/dsu/fall2026/csc789_capstone/repo/docs/CSC789-proposal-submit.tex" 1794460566 40949 f044288165bef07e235cc31eff8fe14b ""
+["pdflatex"] 1795412839.37745 "/Users/sravyad/Sites/dsu/fall2026/csc789_capstone/repo/docs/CSC789-proposal-submit.tex" "CSC789-proposal-submit.pdf" "CSC789-proposal-submit" 1795412841.18827 0
+  "/Users/sravyad/Sites/dsu/fall2026/csc789_capstone/repo/docs/CSC789-proposal-submit.tex" 1795412837.12878 47674 f00bec84c12263395732cf85ac837263 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -96,12 +96,12 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1741926805 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "CSC789-proposal-submit.aux" 1794460890.22772 5703 8911b8f4bba75cab1d819e8efdee4623 "pdflatex"
-  "CSC789-proposal-submit.bbl" 1794460889.53151 5016 71fb339923340f9f036d5a694886034e "bibtex CSC789-proposal-submit"
-  "CSC789-proposal-submit.tex" 1794460566 40949 f044288165bef07e235cc31eff8fe14b ""
+  "CSC789-proposal-submit.aux" 1795412840.80879 6195 6cf805f5ce0f2a1ce7af98ccaeda2036 "pdflatex"
+  "CSC789-proposal-submit.bbl" 1795412839.3741 5016 71fb339923340f9f036d5a694886034e "bibtex CSC789-proposal-submit"
+  "CSC789-proposal-submit.tex" 1795412837.12878 47674 f00bec84c12263395732cf85ac837263 ""
   "figures/baseline_results.png" 1792974559.75513 34587 226177e49094710e04b56d575350b6f4 ""
   "figures/ontology_v1_protege.png" 1792961649.83535 335189 2c7560e695f72e8a8a4f0771aa21be23 ""
-  "figures/results_test.png" 1794449778.23343 40946 8e70039d360f66454369f0ebc95c497d ""
+  "figures/results_test.png" 1795383461.69494 40986 65a68042b4a75a850d48280d6edadb8b ""
   "figures/startup_check_planted.png" 1792962695.02225 107768 aa629036f67ac72f581063af5409e348 ""
   "figures/taxonomy_overview.png" 1792801975.86493 110303 225f4d3850069f50073dc51ec04ae38f ""
   (generated)

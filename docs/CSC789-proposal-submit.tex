@@ -23,7 +23,7 @@ Madison, SD, USA}
 \maketitle
 
 \begin{abstract}
-LLM-based conversational agents are usually told what they may respond to through a free-text system prompt, most often a list of forbidden topics. Such prompts cannot be checked for contradictions, miss cases their author did not anticipate, and do not let a permission on a broad category carry down to the narrower cases inside it. This project tests whether an ontology in which permissions are attached to concepts and inherited through the hierarchy makes better allow/refuse decisions for a city 311 assistant than a prose prompt, a blocklist, or a flat topic list, on the same set of questions. A pilot evaluation of the two baselines on 42 questions shows them failing in opposite directions: the flat list refuses nothing in scope but lets near-miss questions through, while the prompt catches near misses but refuses hazardous-but-routine requests as emergencies. On a frozen 154-question test split, the ontology reaches 0.94 accuracy when the hosted model is used only to name the concept and the ontology tree makes the decision, compared to 0.78 for the prompt with a blocklist (McNemar $p < 0.001$). While the blocklist cut down on prompt leaks, it doubled the wrong refusals. Embedding similarity also failed to separate near misses whether flat or hierarchical, and on questions that depend on inheritance, the ontology runs scored 0.97 to 1.00 against 0.61 to 0.73 for the prompts.
+LLM-based conversational agents are usually told what they may respond to through a free-text system prompt, most often a list of forbidden topics. Such prompts cannot be checked for contradictions, miss cases their author did not anticipate, and do not let a permission on a broad category carry down to the narrower cases inside it. This project tests whether an ontology in which permissions are attached to concepts and inherited through the hierarchy makes better allow/refuse decisions for a city 311 assistant than a prose prompt, a blocklist, or a flat topic list, on the same set of questions. A pilot evaluation of the two baselines on 42 questions shows them failing in opposite directions: the flat list refuses nothing in scope but lets near-miss questions through, while the prompt catches near misses but refuses hazardous-but-routine requests as emergencies. On a frozen test split of 154 questions, when every approach is given the same 39-service policy, the ontology reaches 0.96 accuracy where the hosted model is used only to name the concept and the tree makes the decision, against 0.86 for the prompt with a blocklist and 0.84 for the plain prompt (McNemar $p=0.004$ and $p=0.001$). The blocklist reduced the prompt's leaks but increased its wrong refusals; embedding similarity, flat or hierarchical, could not separate near misses; and on inheritance-dependent questions the ontology runs score 0.97 to 1.00 against 0.70 to 0.73 for the prompts. The remaining seven ontology errors all involve matching, and three were missed by every approach.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -98,7 +98,7 @@ I use the Dallas 311 Service Requests open data, October 2020 to present~\cite{d
 \label{fig:taxonomy}
 \end{figure}
 
-The pilot evaluation set has 42 hand-written questions in four groups: direct (11), inheritance-dependent (10), paraphrase (10), and out-of-scope (11), each labeled allow or refuse with its concept. The out-of-scope group is built from near misses that reuse 311 vocabulary. The full set is described in the implementation section.
+The pilot evaluation set has 42 hand-written questions in four groups: direct (11), inheritance-dependent (10), paraphrase (10), and out-of-scope (11), each labeled allow or refuse with its concept. The out-of-scope group is built from near misses that reuse 311 vocabulary. The full set is described in the Evaluation section.
 
 \section{Proposed AI Approach}
 
@@ -108,7 +108,7 @@ Each approach takes a question and returns \textbf{allow} or \textbf{refuse} wit
   \item \textbf{(A) Prose prompt.} A system prompt describing what the assistant covers, run through a small hosted LLM.
   \item \textbf{(B) Prose + blocklist.} Same prompt plus an explicit list of forbidden topics.
   \item \textbf{(R) Flat list.} The same concepts as the ontology, no hierarchy, matched by embedding similarity. No LLM.
-  \item \textbf{(C) Ontology (proposed).} generated from the Dallas request types (39 concepts under department classes), checked in Prot\'eg\'e, each branch marked permitted or denied.
+  \item \textbf{(C) Ontology (proposed).} Generated from the Dallas request types (39 concepts under department classes), checked in Prot\'eg\'e, each branch marked permitted or denied.
   \begin{itemize}\setlength{\itemsep}{0pt}
     \item Match the question to the closest concept with a small sentence-embedding model (\texttt{bge-small-en-v1.5}), or with the hosted LLM naming one concept from the list; no match means refuse.
     \item Walk the concept's ancestors in Python with a most-specific-wins rule, so a parent's permission covers its children unless a child overrides it.
@@ -207,43 +207,35 @@ D: ontology, gold concept     & 0/11 & 0/31 & 31/31 \\
 
 \textbf{Concept list v2.} The Dallas volume data showed that the 30 pilot concepts covered only 68\% of requests and left out common services such as parking violations, utility line locate, encampments, noise, parks, animal bites and street lighting. Nine concepts were added with descriptions from the service names, and the ontology regenerated: 58 classes under nine department classes, 86\% of requests. Baseline B, the prose prompt with an explicit twelve-item blocklist, was implemented with the same model and scoring as A; on the pilot it allowed 0/11 and refused 3/31, the same hazardous-but-routine refusals as A.
 
-\textbf{Evaluation set v1.} The full set has 196 questions. The 42 pilot questions were written during the initial stages of the project and have been used in every design decision since, so they are included in the tuning split. 132 further questions were drafted as candidates from the Dallas service list ranked by request volume, so that every one of the 34 permitted concepts is asked about at least twice, then reviewed and labeled by me. 22 more were written independently by a family member from their own experience, without seeing the concept list; three of them concern things Dallas 311 does take (traffic calming, cut-through traffic, the outdoor siren) that the 39-concept policy does not model, and are labeled refuse under the policy as written. The 154 non-pilot questions form the test split, assigned once by a script with a fixed seed and committed before any test run. Nothing below was tuned on the test split. A second labeler on a sample is pending.
+\section{Evaluation}
 
-\textbf{Improving the matching.} Pilot run C showed three issues in the matcher for wrong concept selection:
-\begin{itemize}
-    \item Department classes and hazardous subclasses were exposed as matching targets, which pulled queries away from their parent concept.
-    \item The Dallas suffixes \emph{Routine} and \emph{Hazardous} in generated descriptions attracted emergency wording.
-    \item The authored exception \texttt{AnimalAttackNow} was described too broadly and caught neglect and nuisance questions.
-\end{itemize}
+\textbf{Question set.} 196 questions in four groups: direct (45), inheritance-dependent (43), paraphrase (48) and out-of-scope (60). The 42 pilot questions have shaped every design decision, so they serve as the tuning split. 132 further questions were built from the Dallas service list ranked by request volume, covering each permitted concept at least twice, and labeled by me; 22 were written independently by a family member without seeing the concept list (including three  services not present in the 39-concept policy, so were labeled as refuse). The 154 non-pilot questions are the test split, assigned once with a fixed seed and committed before any test run.
 
-To fix this, I made three changes and verified on the 42 tuning questions only. First, the matcher now selects only among main concepts, while departments and hazardous subclasses remain in the tree for the permission walk. Second, the suffixes were stripped. Third, the exception was narrowed to an active attack in progress.
+\textbf{Procedure.} All five approaches ran on the same 196 questions and were scored on the 154 test questions. The tunable settings (matcher candidates, description cleaning, the authored exception, and the similarity threshold) were adjusted on the 42 tuning questions and frozen before testing. Because the hosted model has no temperature setting, A, B, and the ontology with the LLM matcher were run three times each. The majority verdict was scored, and verdicts that differed across runs are reported. One correction was made after an initial full run: the prompt's service list still came from the pilot and missed the nine v2 services, and one blocklist item ("noise between neighbors") contradicted an in-scope concept. The prompt and blocklist were updated to match the same 39-service policy as the ontology, and A and B were rerun, with the earlier run kept in the repository history.
 
-After these changes, concept accuracy on the tuning split improved from 14/31 to 17/31, while out-of-scope leaks stayed at 7/11. Two of these leaks matched on concepts added in v2 (parking ticket on \texttt{ParkingViolation} and bite lawsuit on \texttt{AnimalBite}). This indicates that a larger policy gives similarity matching more near-miss targets. Therefore, a second matcher was added using the same hosted model as baselines A and B to select one concept name from the list, while the tree still makes the decision. This keeps the model constant when comparing with B and only varies how the policy is represented. On the tuning split, it achieves 31/31 on concepts, 1/11 out-of-scope allowed, and 0/31 in-scope refused.
+\textbf{Matching.} Pilot run C had three matcher problems: department classes and Hazardous subclasses were included as matching targets, the Dallas suffixes \emph{Routine} and \emph{Hazardous} in descriptions attracted emergency wording, and the \texttt{AnimalAttackNow} exception was written too broadly. All three issues were fixed on the tuning split only by restricting candidates to concepts, stripping the suffixes, and narrowing the exception. Concept accuracy went from 14/31 to 17/31, while leaks stayed at 7/11, including two on v2 concepts. A second matcher was then added that uses the same hosted model as A and B to pick one concept from the list while the tree makes the decision. This keeps the model constant in the comparison with B and varies only how the policy is represented. On the tuning split, this setup reaches 31/31 concepts, 1/11 leaks, and 0/31 false refusals.
 
-\textbf{Results on the test split.} Table~\ref{tab:test} and Fig.~\ref{fig:test} compare all five approaches on the same 154 test questions (105 in-scope and 49 out-of-scope).
-\begin{itemize}
-    \item \textbf{Overall accuracy:} The ontology with LLM matching (C-llm) is the most accurate, at 0.94 (8/49 out-of-scope allowed, 1/105 in-scope refused, and 96/105 correct concepts). In comparison, the prompt with blocklist reaches 0.78 and the plain prompt gets 0.79. While the blocklist reduced leaks from 14/49 to 6/49, it increased wrong refusals from 18/105 to 28/105. This trade-off was not visible earlier due to the small size of 31 in-scope questions in the pilot set.
-    \item \textbf{Embedding similarity:} Both flat and hierarchical embedding similarity performed poorly on out-of-scope queries, allowing 39/49 and 38/49 respectively. Near misses are close to in-scope concepts by their nature, and adding the hierarchy does not change how similarity matching behaves.
-    \item \textbf{Inheritance-dependent questions:} Grouping by question type, inheritance-dependent queries separate the approaches the most, where C-embed achieves 1.00, C-llm 0.97, R 0.94, A 0.73, and B 0.61.
-\end{itemize}
+\textbf{Metrics.} Out-of-scope questions wrongly allowed (of 49), in-scope questions wrongly refused (of 105), accuracy, verdicts changed between runs, and, for approaches that name a concept, concept accuracy on in-scope questions. McNemar's exact test compares each approach with the ontology with the LLM matcher.
 
-For statistical significance, I ran McNemar's exact test between C-llm and each baseline, which gives $p < 0.001$ across all comparisons (for example, against B, C-llm gets 30 questions right where B is wrong, and only 5 in reverse). Against run D with the gold concept, it gives $p = 0.004$ due to the 9 remaining matching errors. Also, across three identical runs, A changed 14 and B changed 11 out of 154 verdicts, whereas the ontology tree decisions are deterministic. C-llm was evaluated in a single run, and three runs are planned before the final report.
+\section{Results}
+
+Table~\ref{tab:test} and Fig.~\ref{fig:test} give all five approaches on the same 154 test questions.
 
 \begin{table}[h]
 \centering
-\caption{Test split, 154 questions (105 in-scope, 49 out-of-scope). A and B are the majority of three runs; flipped = verdicts that differed between runs. Concept accuracy counts a Hazardous subclass of the correct concept as correct (it makes no difference on this split).}
+\caption{Test split, 154 questions (105 in-scope, 49 out-of-scope). A, B and C-llm are the majority of three runs; flipped = verdicts that differed between runs.}
 \label{tab:test}
 \small
-\begin{tabular}{lcccc}
+\begin{tabular}{lccccc}
 \toprule
-Approach & OOS allowed & In-scope refused & Concept acc. & Flipped \\
+Approach & OOS allowed & In-scope refused & Concept acc. & Accuracy & Flipped \\
 \midrule
-A prose prompt        & 14/49 & 18/105 & -- & 14 \\
-B prompt + blocklist  & 6/49  & 28/105 & -- & 11 \\
-R flat list           & 39/49 & 8/105  & 47/105 & -- \\
-C ontology, embedding & 38/49 & 7/105  & 44/105 & -- \\
-C ontology, LLM match & 8/49  & 1/105  & 96/105 & -- \\
-D ontology, gold      & 0/49  & 0/105  & 105/105 & -- \\
+A prose prompt        & 13/49 & 11/105 & --      & 0.84 & 9 \\
+B prompt + blocklist  & 5/49  & 16/105 & --      & 0.86 & 9 \\
+R flat list           & 39/49 & 8/105  & 47/105  & 0.70 & -- \\
+C ontology, embedding & 38/49 & 7/105  & 44/105  & 0.71 & -- \\
+C ontology, LLM match & 6/49  & 1/105  & 96/105  & 0.96 & 4 \\
+D ontology, gold      & 0/49  & 0/105  & 105/105 & 1.00 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -255,15 +247,65 @@ D ontology, gold      & 0/49  & 0/105  & 105/105 & -- \\
 \label{fig:test}
 \end{figure}
 
-\textbf{What remains.} A second labeler on a sample; three runs of the LLM matcher; the prompt conflict experiment (three contradictory items planted in the blocklist); the policy-scale experiment (prompt against ontology at 100 and 270 concepts); the final report and presentation.
+\textbf{Overall.} The ontology with LLM matching is the most accurate approach at 0.96, allowing 6/49 out-of-scope questions, refusing 1/105 in-scope questions, and identifying 96/105 concepts correctly. The prompt with a blocklist reaches 0.86, and the plain prompt reaches 0.84. McNemar's exact test gives $p=0.004$ against B (18 questions C-llm gets right and B gets wrong, compared to 4 the reverse), $p=0.001$ against A (21 vs.\ 4), and $p<0.001$ against R and C-embed (41 vs.\ 1 and 39 vs.\ 1). Against run D using the gold concept, $p=0.016$ across the 7 remaining matching errors.
+
+\textbf{By group.} Across the four question groups, accuracy breaks down as follows:
+\begin{itemize}
+    \item \textbf{Direct:} A 0.97, B 0.91, R 0.91, C-embed 0.91, C-llm 1.00.
+    \item \textbf{Inheritance-dependent:} A 0.73, B 0.70, R 0.94, C-embed 1.00, C-llm 0.97.
+    \item \textbf{Paraphrase:} A 0.97, B 0.92, R 0.92, C-embed 0.89, C-llm 1.00.
+    \item \textbf{Out-of-scope:} A 0.73, B 0.90, R 0.20, C-embed 0.22, C-llm 0.88.
+\end{itemize}
+The inheritance-dependent group separates the approaches most clearly: both prompts drop to around 0.70, while every ontology run stays at 0.94 or above.
+
+\textbf{Repeatability and independent questions.} Across three identical runs, A and B each changed 9 of 154 verdicts, whereas the ontology with the LLM matcher changed 4, all on out-of-scope questions where the model alternated between a permitted concept and \texttt{NONE}. Runs R, C-embed, and D are deterministic. On the 22 independently written questions, accuracy drops across every approach (A 0.50, B 0.77, C-llm 0.86), while the overall ranking holds.
+
+\section{Discussion}
+
+\textbf{What the comparison shows.} Holding the model, policy, and questions constant, representing the policy as a tree and using the model only to name the concept outperforms writing the policy as prose and letting the model decide by 9 percentage points, a statistically significant difference. Overall, the two prompts are indistinguishable: adding the blocklist reduced leaks from 13 to 5 out of 49, while increasing false refusals from 11 to 16 out of 105. Embedding similarity failed on out-of-scope questions altogether, leaking 39 and 38 out of 49, and adding the hierarchy did not fix this because the tree operates after a concept is selected rather than during concept selection.
+
+\textbf{Why the prompts fail where they fail.} False refusals follow distinct patterns across the approaches:
+\begin{itemize}
+    \item \textbf{Emergency routing (A and B):} All 11 of A's false refusals and 10 of B's 16 occur on inheritance-dependent questions. Both prompts treat a flooded intersection, sinkhole, fallen tree, dark traffic signal, or deer in the road as emergencies and route them to 911, even though Dallas 311 has a service type for each.
+    \item \textbf{Blocklist over-triggering (B only):} B's remaining 6 false refusals come from its own blocklist, where past-tense animal bite questions trigger the animal-injury rule and a stolen recycling cart triggers the theft rule.
+    \item \textbf{Inheritance protection (Ontology):} Each hazardous variant inherits its permission from the parent routine concept. Once the concept is identified, hazardous wording cannot overturn the decision, confirming the inheritance behavior the project set out to measure.
+\end{itemize}
+
+\textbf{Where the ontology fails.} The seven C-llm errors are listed in Table~\ref{tab:errors} and fall into three categories:
+\begin{itemize}
+    \item \textbf{False refusal (1 error):} A suspected sewer leak was mapped to no concept, although its gold label (\texttt{LineLocate}) is itself doubtful.
+    \item \textbf{Shared evaluation edge cases (3 leaks):} Every approach missed the same three questions involving a dead animal in a backyard, ducks, and iguanas. Each involves either a service outside the 39 modeled concepts or a disputable label, reflecting an evaluation limitation rather than a method failure.
+    \item \textbf{Missed contextual cues (3 leaks):} The matcher failed to weigh jurisdiction cues for a pothole on I-35 and highway loop construction, as well as urgency cues for a dog in a hot car.
+\end{itemize}
+On eight additional in-scope questions, C-llm selected an incorrect but still permitted concept among \texttt{AnimalNuisance}, \texttt{NoiseComplaint}, \texttt{ConstructionComplaint}, and \texttt{AnimalLoose}, where the Dallas service names overlap. In each case, the final allow verdict was still correct, and the audit trail records which concept drove the decision.
+
+\begin{table}[h]
+\centering
+\caption{All errors of the ontology with LLM matching on the test split.}
+\label{tab:errors}
+\small
+\begin{tabular}{llp{4.6cm}}
+\toprule
+Id & Gold & Question (abridged) and cause \\
+\midrule
+G2-41 & allow & sewer line leaking in the alley; unmatched, label doubtful \\
+G4-16 & refuse & dog locked in a hot car, not moving; urgency cue missed \\
+G4-21 & refuse & pothole on I-35; jurisdiction in one token \\
+G4-40 & refuse & dead animal in my backyard; private property, all approaches wrong \\
+I-08 & refuse & highway loop construction for 3 years; jurisdiction \\
+I-15 & refuse & ducks overpopulation; wildlife, all approaches wrong \\
+I-16 & refuse & iguanas eating the garden; wildlife, all approaches wrong \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{What the Ontology Adds Beyond a Blocklist}
 
 Run D is perfect by construction and proves only that the tree encodes the policy; it is not evidence that the system works. The case for the ontology rests on properties a prose prompt or blocklist does not have, each of which was measured in this project.
 
-\textbf{Hard enforcement and determinism.} A and B are soft controls: the model reads the policy and decides, and across three identical runs 14 and 11 of 154 test verdicts changed, with reasons that changed wording even when the verdict did not. R, C and D are hard controls: once a concept is chosen the verdict is a lookup, identical on every run, with no API call. Recent work frames prompt-based enforcement as having no guarantee and argues for deterministic mechanisms outside the model wherever the policy is concrete enough~\cite{baracaldo2026}; a 311 scope policy is exactly that concrete.
+\textbf{Hard enforcement and determinism.} A and B are soft controls: the model reads the policy and decides, and across three identical runs 9 and 9 of 154 test verdicts changed, against 4 for the ontology with the LLM matcher, with reasons that changed wording even when the verdict did not. R, C and D are hard controls: once a concept is chosen the verdict is a lookup, identical on every run, with no API call. Recent work frames prompt-based enforcement as having no guarantee and argues for deterministic mechanisms outside the model wherever the policy is concrete enough~\cite{baracaldo2026}; a 311 scope policy is exactly that concrete.
 
-\textbf{Exceptions as structure, not phrases.} The hardest group is the inheritance-dependent one, where a hazardous pothole is an exception to \emph{hazards are emergencies} and an attack in progress is an exception to \emph{animal matters are allowed}. B refuses the bent guardrail and the limb hitting trucks because the emergency item of its list fires on a single phrase, which is the dominant failure the SafePyramid benchmark reports for in-context policies with exceptions~\cite{safepyramid2026}. In the ontology an exception is a node with a tag: \texttt{PotHoleHazardous} inherits permit from \texttt{PotHole}, \texttt{AnimalAttackNow} carries deny under a permitted department, and once the concept is right the verdict cannot over-trigger. Run D confirms this on every inherit question; run C shows what remains is recognizing the concept, a separable problem that B cannot separate.
+\textbf{Exceptions as structure, not phrases.} The hardest group is the inheritance-dependent one, where a hazardous pothole is an exception to \emph{hazards are emergencies} and an attack in progress is an exception to \emph{animal matters are allowed}. B refuses the flooded intersection, the sinkhole and the fallen tree because the emergency item of its list fires on a single phrase, which is the dominant failure the SafePyramid benchmark reports for in-context policies with exceptions~\cite{safepyramid2026}. In the ontology an exception is a node with a tag: \texttt{PotHoleHazardous} inherits permit from \texttt{PotHole}, \texttt{AnimalAttackNow} carries deny under a permitted department, and once the concept is right the verdict cannot over-trigger. Run D confirms this on every inherit question; run C shows what remains is recognizing the concept, a separable problem that B cannot separate.
 
 \textbf{Conflicts are caught before any question is asked.} Five planted errors in the ontology produce six reported problems and the program refuses to start. The same kind of contradiction in a prompt is invisible; nothing reads a prompt for consistency. The most recent OWL-based policy work for LLM agents, by the Rei authors, lists static conflict detection as future work~\cite{agenticrei2026}; here it is a 40-line startup check.
 
@@ -271,11 +313,31 @@ Run D is perfect by construction and proves only that the tree encodes the polic
 
 \textbf{An audit trail.} Every ontology verdict records the matched concept and the class whose tag decided it (\texttt{decided\_by}), so a wrong allow can be traced to a matching error or a policy error in one look. B's reason is a free-text sentence that varies between runs.
 
-\textbf{What it does not add.} The hierarchy does not improve matching: the flat list and the ontology with the same embedding matcher are within one question of each other on every metric. The ontology's accuracy advantage comes from separating the two jobs, naming the concept and deciding the verdict, and giving each to the component suited to it. With that separation the ontology is ahead of the blocklist prompt by 16 points on the test split, the difference is significant, and the nine errors that remain against run D are all in matching.
+\textbf{What it does not add.} The hierarchy does not improve matching: the flat list and the ontology with the same embedding matcher are within one question of each other on every metric. The ontology's accuracy advantage comes from separating the two jobs, naming the concept and deciding the verdict, and giving each to the component suited to it. With that separation the ontology is ahead of the blocklist prompt by 9 points on the test split, the difference is significant, and the seven errors that remain against run D are all in matching.
 
-\section{Expected Contribution}
+\section{Limitations}
 
-A small, reproducible comparison of prose, blocklist, flat-list, and hierarchical scope policies on a constructed 311 benchmark, released with the question set and ontology. It shows that the hierarchy with inherited permissions decides correctly whenever the concept is right, that automatic matching is where the error lives and becomes small once the matcher is an LLM, and that a structured policy can be checked for conflicts before use. The blocklist prompt did not match the ontology on the test split, and the comparison shows why: the blocklist bought fewer leaks with more wrong refusals.
+Several limitations constrain how these results should be interpreted:
+\begin{itemize}
+    \item \textbf{Dataset authorship and label noise:} Of the 154 test questions, 132 were written and labeled by the author without a second annotator, leaving inter-annotator agreement unmeasured and at least four labels open to debate. Every approach scores lower on the 22 independently written questions, indicating that the author-written questions are easier than real user traffic.
+    \item \textbf{Post-run baseline correction:} The baselines were updated once after an initial full run to fix missing v2 services and a contradictory blocklist item. While this change favored the baselines, it also meant the prompt was examined alongside test results once.
+    \item \textbf{Model and tuning scope:} Experiments used a single hosted LLM and a single embedding model, with all tuning performed on a 42-question split.
+    \item \textbf{Policy coverage:} The ontology models 39 concepts covering 86\% of Dallas 311 request volume. The independent questions targeting unmodeled services show that performance degrades outside those 39 concepts.
+    \item \textbf{Matcher cost and determinism:} The ontology's accuracy relies on the LLM matcher, which requires an API call per message and flipped 4 of 154 verdicts across runs. By contrast, the deterministic embedding matcher is not viable for out-of-scope detection.
+    \item \textbf{Conflict detection evidence:} The consistency-checking claim relies on planted ontology errors, as the planned planted-contradiction experiment on the prose prompt was not carried out.
+\end{itemize}
+
+\section{Conclusion}
+
+Representing a 311 assistant's scope as an ontology with inherited permissions, while using a language model only to identify the concept and letting the tree make the decision, reached 0.96 accuracy on a frozen 154-question test split, compared to 0.86 for the same model using a prose prompt and blocklist. The improvement occurs where expected: hazardous-but-routine requests that the prompt refuses as emergencies and the tree allows through inheritance. Because the hierarchy does not improve concept matching and all remaining errors stem from matching, the contribution lies in the decision layer rather than recognition. It provides a policy that can be checked for contradictions before any message arrives, produces the same verdict every time for a given concept, and records which rule drove each decision.
+
+Future work focuses on four concrete steps:
+\begin{itemize}
+    \item \textbf{Second annotator:} Have an independent labeler review the dataset to measure inter-annotator agreement and resolve ambiguous gold labels.
+    \item \textbf{Prompt contradiction experiment:} Run the planned planted-contradiction test on the prose prompt to compare its failure rate directly against the ontology's consistency checks.
+    \item \textbf{Policy scaling:} Expand the policy from 39 concepts toward the full 270 Dallas 311 request types to test whether prompt performance degrades as policy size grows while the tree remains stable.
+    \item \textbf{Cross-domain extension:} Apply the same ontology-backed decision layer to other regulated service domains, such as healthcare member support, insurance claims intake, or financial customer service, where assistants must enforce strict scope boundaries, inherit permissions across service hierarchies, and maintain an auditable record of every allow or refuse decision.
+\end{itemize}
 
 \vspace{0.5em}
 \noindent{\small\emph{AI use disclosure:} AI tools were used to help format and edit sections of this report, to check references, and to assist with the data-preparation and baseline scripts, all of which I reviewed, modified, and tested. The design, ontology, question set, and analysis are my own.}
